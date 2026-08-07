@@ -268,8 +268,8 @@ payload, e os componentes só renderizam props — nenhum deles importa o client
 ## Git
 
 `main` protegida por convenção: todo trabalho passou por branch e Pull Request, mesmo em equipe de um.
-Doze PRs, commits atômicos em Conventional Commits, merges por rebase para manter o histórico linear —
-sem commits de merge poluindo a leitura.
+Quinze PRs, cinquenta commits atômicos em Conventional Commits e merges por rebase — o histórico é
+linear, sem um único commit de merge poluindo a leitura.
 
 Cada PR descreve o que foi feito, por que cada decisão foi tomada e como foi verificada, incluindo os
 defeitos encontrados durante a verificação.
@@ -280,10 +280,10 @@ defeitos encontrados durante a verificação.
 
 Coisas que ficaram de fora e o motivo:
 
-- **Sem testes de integração com banco.** Os 63 testes são unitários e de slice. Dois defeitos deste
-  projeto — `LazyInitializationException` na serialização e o bean que quebrava só na imagem JRE — não
-  seriam pegos por eles; apareceram exercitando a aplicação de verdade. Testcontainers com
-  `@DataJpaTest` é o próximo passo natural.
+- **Sem testes de integração com banco.** Os 63 testes são unitários e de slice. Seis defeitos deste
+  projeto atravessaram a suíte verde — entre eles a `LazyInitializationException` na serialização e o
+  bean que só quebrava na imagem JRE — e apareceram exercitando a aplicação de verdade. Estão listados
+  no [`AI_USAGE.md`](AI_USAGE.md). Testcontainers com `@DataJpaTest` é o próximo passo natural.
 - **Sem autenticação.** Não estava no escopo; num sistema real, cada liquidação precisaria de
   identidade e trilha de quem a executou.
 - **Provedor de câmbio é simulado.** A interface existe e a implementação é substituível por um cliente
