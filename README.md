@@ -276,6 +276,43 @@ defeitos encontrados durante a verificação.
 
 ---
 
+## Checklist do enunciado
+
+| Requisito | Onde está |
+|---|---|
+| **1.** Currency Engine: armazenar e prover taxas | `ExchangeRateService`, histórico append-only com vigência |
+| **1.** Endpoint de atualização manual **ou** integração mockada | Os dois: `POST /api/exchange-rates` e `POST /api/exchange-rates/sync` |
+| **2.** Strategy por tipo de recebível | `PricingStrategy` + registro com verificação de cobertura na subida |
+| **2.** Fórmula do valor presente | `PricingService.presentValue`, expoente fracionário via big-math |
+| **2.** Conversão cambial no final | `PricedBatch`, sobre o valor presente já arredondado |
+| **3.** Banco relacional | PostgreSQL 16 + Flyway |
+| **3.** ACID, sem liquidação pela metade | Lote como agregado numa transação + `CHECK` constraints |
+| **3.** Race conditions | Lock otimista por `@Version`, testado com 6 chamadas simultâneas |
+| **4.** API REST com verbos e status semânticos | 14 rotas, mapeamento de erro documentado acima |
+| **4.** OpenAPI / Swagger | `/swagger-ui.html` |
+| **5.** Extrato filtrando por período, cedente e moeda | `GET /api/reports/settlements` |
+| **5.** *Diferencial:* SQL nativo em vez de ORM puro | `SettlementReportReader`, com `EXPLAIN` confirmando o uso de índice |
+| **6.** Três camadas | `api → domain → infrastructure` |
+| **6.** Relatórios em duas camadas | Controller do extrato fala direto com o reader |
+| **Front 1.** Input do recebível | Painel do operador |
+| **Front 1.** Cálculo líquido em tempo real | Simulação com debounce a cada alteração |
+| **Front 2.** Paginação server-side | `Pagination` + `PageResult` do backend |
+| **Front 2.** Filtros dinâmicos | Filtros na query string |
+| **Front 3.** Separação UI / lógica de estado | Hooks concentram estado; componentes só renderizam props |
+| **Front 3.** Estado global *(se necessário)* | TanStack Query para estado de servidor; sem Redux, justificado acima |
+| **NF 1.** Tratamento de exceções | `ApiErrorHandler` global, RFC 7807 |
+| **NF 2.** Critérios de aceite | Seção acima, em quatro eixos |
+| **Pleno.** Conventional Commits | 50 commits |
+| **Pleno.** Pull Requests descritivos | 17 PRs |
+| **Pleno.** Histórico limpo | Merges por rebase, zero commits de merge |
+| **Pleno.** Docker e Docker Compose | Três serviços orquestrados |
+| **Pleno.** Exception handler global | `ApiErrorHandler` |
+| **Pleno.** Validações de input robustas | Bean Validation em toda entrada + `fail-on-unknown-properties` |
+| **Pleno.** Testes unitários das regras de precificação | 14 testes só do motor, dentro dos 63 |
+| **7.** Diagrama ER | [`docs/modelo-de-dados.md`](docs/modelo-de-dados.md) |
+| **7.** Scripts DDL | [`docs/schema.sql`](docs/schema.sql) + migrações Flyway |
+| **2 (política de IA).** `AI_USAGE.md` | [`AI_USAGE.md`](AI_USAGE.md) |
+
 ## Limites conhecidos
 
 Coisas que ficaram de fora e o motivo:
@@ -284,6 +321,11 @@ Coisas que ficaram de fora e o motivo:
   projeto atravessaram a suíte verde — entre eles a `LazyInitializationException` na serialização e o
   bean que só quebrava na imagem JRE — e apareceram exercitando a aplicação de verdade. Estão listados
   no [`AI_USAGE.md`](AI_USAGE.md). Testcontainers com `@DataJpaTest` é o próximo passo natural.
+- **Sem cadastro de cedente pela interface.** O enunciado cita o cedente como dimensão de filtro do
+  extrato, não como entidade a cadastrar — e é isso que está entregue: `GET /api/assignors` alimenta o
+  seletor do painel e o filtro do extrato, com dois cedentes no seed. Um `POST` seria trivial, mas
+  puxaria junto o que um cadastro de verdade exige: validação de CNPJ com dígito verificador, consulta
+  de situação cadastral, análise de crédito do cedente. Preferi não entregar meia porta.
 - **Sem autenticação.** Não estava no escopo; num sistema real, cada liquidação precisaria de
   identidade e trilha de quem a executou.
 - **Provedor de câmbio é simulado.** A interface existe e a implementação é substituível por um cliente
