@@ -169,3 +169,14 @@ td.numeric {
 tbody tr:hover {
   background: var(--surface-sunken);
 }
+
+button.danger {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+button.danger:hover:not(:disabled) {
+  background: var(--danger-soft);
+  border-color: var(--danger);
+  color: var(--danger);
+}

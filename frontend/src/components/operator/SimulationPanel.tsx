@@ -31,7 +31,7 @@ export function SimulationPanel({ simulation, isFetching, isIncomplete }: Props)
               hint={`deságio de ${money(simulation.totalFaceValue - simulation.totalPresentValue, simulation.faceCurrency)}`}
             />
             <Total
-              label="Liquido ao cedente"
+              label="Líquido ao cedente"
               value={money(simulation.totalNetAmount, simulation.paymentCurrency)}
               hint={
                 simulation.crossCurrency
@@ -51,7 +51,7 @@ export function SimulationPanel({ simulation, isFetching, isIncomplete }: Props)
                   <th className="numeric">Taxa</th>
                   <th className="numeric">Valor de face</th>
                   <th className="numeric">Valor presente</th>
-                  <th className="numeric">Liquido</th>
+                  <th className="numeric">Líquido</th>
                 </tr>
               </thead>
               <tbody>

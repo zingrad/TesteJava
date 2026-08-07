@@ -45,7 +45,7 @@ export function StatementTable({ rows, filters, isFetching, onSort }: Props) {
             </SortableHeader>
             <th className="numeric">Valor presente</th>
             <SortableHeader sort="NET_AMOUNT" filters={filters} onSort={onSort} numeric>
-              Liquido
+              Líquido
             </SortableHeader>
             <SortableHeader sort="SETTLED_AT" filters={filters} onSort={onSort}>
               Liquidada em
