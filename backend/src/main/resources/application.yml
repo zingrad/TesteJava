@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: credit-engine
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/srm_credit}
+    username: ${DB_USER:srm}
+    password: ${DB_PASSWORD:srm}
+    hikari:
+      pool-name: credit-engine-pool
+      maximum-pool-size: ${DB_POOL_SIZE:10}
+      connection-timeout: 5000
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        jdbc.time_zone: UTC
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  jackson:
+    default-property-inclusion: non_null
+
+server:
+  port: ${SERVER_PORT:8080}
+  error:
+    include-message: never
+    include-stacktrace: never
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+  api-docs:
+    path: /v3/api-docs
+
+logging:
+  level:
+    br.com.srm.creditengine: ${LOG_LEVEL:INFO}
