@@ -72,7 +72,7 @@ class SettlementReportController {
     @GetMapping("/summary")
     @Operation(summary = "Totais consolidados do extrato",
             description = "Mesmos filtros do extrato, agregados por par de moedas. O valor de face e o "
-                    + "valor presente estão na moeda do título; o liquido, na moeda de pagamento.")
+                    + "valor presente estão na moeda do título; o líquido, na moeda de pagamento.")
     List<SettlementSummaryRow> summary(
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to,

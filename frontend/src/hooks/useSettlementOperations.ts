@@ -39,3 +39,14 @@ export function useSettleSettlement() {
     },
   })
 }
+
+export function useCancelSettlement() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: (reference: string) => endpoints.cancelSettlement(reference),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['statement'] })
+    },
+  })
+}

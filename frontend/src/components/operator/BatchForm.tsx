@@ -3,6 +3,7 @@ import { ApiError } from '../../api/ApiError'
 import type { Assignor, Currency, ReceivableType, Settlement } from '../../api/types'
 import { useSettlementDraft } from '../../hooks/useSettlementDraft'
 import {
+  useCancelSettlement,
   usePricingSimulation,
   useRegisterSettlement,
   useSettleSettlement,
@@ -34,8 +35,9 @@ export function BatchForm({ currencies, receivableTypes, assignors }: Props) {
   const simulation = usePricingSimulation(registered ? null : draft.pricingRequest)
   const register = useRegisterSettlement()
   const settle = useSettleSettlement()
+  const cancel = useCancelSettlement()
 
-  const submissionError = register.error ?? settle.error
+  const submissionError = register.error ?? settle.error ?? cancel.error
   const violationFor =
     submissionError instanceof ApiError
       ? (field: string) => submissionError.violationFor(field)
@@ -55,22 +57,32 @@ export function BatchForm({ currencies, receivableTypes, assignors }: Props) {
     settle.mutate(registered.reference, { onSuccess: setRegistered })
   }
 
+  const handleCancel = () => {
+    if (!registered) {
+      return
+    }
+    cancel.mutate(registered.reference, { onSuccess: setRegistered })
+  }
+
   const handleNewBatch = () => {
     setRegistered(null)
     register.reset()
     settle.reset()
+    cancel.reset()
     draft.reset()
   }
 
   if (registered) {
     return (
       <>
-        <ErrorNotice error={settle.error} />
+        <ErrorNotice error={settle.error ?? cancel.error} />
         <RegisteredSettlement
           settlement={registered}
           onSettle={handleSettle}
+          onCancel={handleCancel}
           onNewBatch={handleNewBatch}
           isSettling={settle.isPending}
+          isCancelling={cancel.isPending}
         />
       </>
     )
