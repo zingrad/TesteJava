@@ -1,11 +1,12 @@
 # Uso de IA neste projeto
 
-Usei IA de forma intensa aqui, e o maior uso não foi escrever código: foi entender o negócio.
+Usei IA de forma intensa aqui, em duas frentes bem diferentes: ela **escreveu a maior parte do código**
+e me **ensinou o negócio**. A segunda foi a que exigiu mais de mim.
 
-Venho de outra área e **não conheço o mercado de crédito**. Antes deste desafio eu não sabia o que era
-um FIDC, o que significa "deságio", nem por que alguém compraria uma duplicata por menos do que ela
-vale. Escrever o código foi a parte fácil. A parte difícil foi chegar num ponto em que eu conseguisse
-olhar para um número na tela e dizer se ele fazia sentido.
+Sou desenvolvedor fullstack e **não venho do mercado financeiro**. Antes deste desafio eu não sabia o
+que era um FIDC, o que significa "deságio", nem por que alguém compraria uma duplicata por menos do que
+ela vale. Escrever o código foi a parte que a IA mais acelerou. A parte difícil foi chegar num ponto em
+que eu conseguisse olhar para um número na tela e dizer se ele fazia sentido.
 
 Este documento é honesto sobre isso, porque um sistema financeiro construído por quem não entende a
 operação é um risco — e eu preferia declarar o risco a escondê-lo.
@@ -143,8 +144,10 @@ automática, teria trocado uma advisory inaplicável por catorze reais.
 - **Vocabulário técnico do setor.** Cedente, deságio, valor de face, valor presente, lastro,
   liquidação, spread. Saber nomear as coisas certo foi o que permitiu modelar tabelas e classes com
   nomes que um analista do mercado reconheceria.
-- **Scaffolding e repetição.** Configuração de projeto, DTOs, mapeamentos, o esqueleto de testes.
-  Trabalho necessário e sem decisão embutida.
+- **Volume de código.** Aqui é onde vale ser direto: entidades, DTOs, mapeamentos, componentes React,
+  CSS, `pom.xml`, Dockerfiles, o esqueleto dos testes e o rascunho da documentação saíram quase todos
+  da IA. É trabalho necessário, extenso e sem decisão embutida — e é o que explica o volume entregue
+  no prazo. O tempo não veio de digitar mais rápido; veio de não digitar.
 - **Levantar alternativas.** Em quase toda decisão de arquitetura, a IA foi boa em listar as opções e
   os trade-offs. A escolha ficou comigo, mas partir de três opções descritas é melhor que partir do
   zero.
@@ -180,10 +183,21 @@ Três regras que adotei durante o projeto e que levo adiante:
 
 ## 4. O que eu domino e o que não domino
 
-**Domino o código entregue.** Consigo explicar cada decisão deste repositório, por que ela foi tomada
-e o que ela custa: por que o lote é um agregado, por que o lock é otimista e não pessimista, por que
-o extrato não passa pelo ORM, por que o `422` é diferente do `400`, por que o total é a soma dos
-arredondados. Nenhuma decisão aqui entrou sem eu entender a consequência.
+**O que é meu neste repositório são as decisões e a verificação.** A IA escreveu a maior parte das
+linhas; eu decidi a forma e conferi o resultado. Consigo explicar cada escolha e o que ela custa: por
+que o lote é um agregado, por que o lock é otimista e não pessimista, por que o extrato não passa pelo
+ORM, por que o `422` é diferente do `400`, por que o total é a soma dos arredondados. Nenhuma dessas
+entrou sem eu entender a consequência.
+
+**Meu perfil é fullstack.** Domino os conceitos de Java e do ecossistema Spring o suficiente para
+decidir a arquitetura e revisar o que a IA produz, mas não me apresento como especialista em Java. O
+que eu trago é conseguir tocar o sistema inteiro — do schema à tela — e enxergar a consequência de uma
+decisão nas duas pontas.
+
+**Sobre o tempo.** Esta entrega saiu em poucas horas, e isso só é possível porque essas horas não foram
+gastas digitando. Foram gastas decidindo a modelagem e conferindo o que saía. A conferência é que
+consumiu o tempo, e é ela que justifica a entrega: se eu tivesse aceitado o que a IA produziu sem
+verificar, teria terminado antes e entregue com seis defeitos dentro.
 
 **Não domino o mercado de crédito.** Entendo hoje a mecânica de uma operação de desconto de recebíveis
 e sei justificar a modelagem. Mas uma operação real tem camadas que não estão aqui e que eu não teria
