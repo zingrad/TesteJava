@@ -157,9 +157,12 @@ automática, teria trocado uma advisory inaplicável por catorze reais.
 - **Testes que só confirmam o código.** Se o valor esperado do teste vem da mesma fonte que a
   implementação, o teste não prova nada. Precisei me impor a regra de calcular os valores
   esperados por fora.
-- **Otimismo sobre o ambiente.** Os dois defeitos mais chatos deste projeto — o proxy do Hibernate
-  morrendo fora da transação e o `RandomGenerator` ausente na imagem JRE — passaram por toda a suíte
-  de testes. Nenhum apareceu sem eu subir a aplicação de verdade e usá-la.
+- **Otimismo sobre o ambiente.** Seis defeitos deste projeto atravessaram a suíte de testes verde e só
+  apareceram com a aplicação no ar: o contrato de erro que não cobria as exceções resolvidas pelo
+  próprio Spring, o proxy do Hibernate morrendo fora da transação, a ordenação do Postgres jogando as
+  operações pendentes para o topo do extrato, o `RandomGenerator` ausente na imagem JRE, a rota que a
+  acentuação automática quebrou e a paginação que se perdia num link montado à mão. Nenhum deles era
+  detectável sem subir a aplicação e usá-la.
 - **Tendência a expandir escopo.** Várias vezes a sugestão veio com coisas de nível sênior que o
   enunciado não pedia. Cortei para manter a entrega no nível a que ela se propõe.
 
@@ -170,7 +173,7 @@ Três regras que adotei durante o projeto e que levo adiante:
 1. **Cálculo financeiro se confere por fora.** À mão, em fonte separada, antes de virar teste.
 2. **Código só está pronto depois de rodar de verdade.** Suíte verde não é evidência suficiente:
    toda funcionalidade deste projeto foi exercitada com `curl` contra o Postgres real e no navegador
-   contra a API real. Foi assim que quatro defeitos apareceram.
+   contra a API real. Foi assim que os seis defeitos acima apareceram.
 3. **Sugestão de ferramenta também se verifica.** Inclusive `npm audit fix`.
 
 ---
