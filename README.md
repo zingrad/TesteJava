@@ -39,7 +39,47 @@ cd frontend && npm install && npm run dev # http://localhost:5173
 ```
 
 Testes do backend: `cd backend && ./mvnw test` — 63 testes.
-Verificação do frontend: `cd frontend && npx tsc -b && npm run build && npm run lint`.
+Verificação estática do frontend: `cd frontend && npx tsc -b && npm run build && npm run lint`.
+
+> **Atenção ao rebuild.** A interface é servida como bundle estático, montado em tempo de build da
+> imagem. `docker compose up -d` sem `--build` sobe o container com o bundle antigo, mesmo que o
+> código-fonte tenha mudado. Depois de mexer no frontend, use `docker compose up -d --build web`.
+
+### Conferindo a interface
+
+Roteiro que exercita as regras de negócio de ponta a ponta, em cerca de dois minutos:
+
+**Painel do operador** (http://localhost:3000/painel)
+
+1. Digite `10000` no valor de face de uma duplicata com vencimento em 60 dias. O valor presente
+   aparece sozinho: **R$ 9.518,14**, que é `10.000 / 1,025²`. O deságio de R$ 481,86 é o que o fundo
+   ganha na operação.
+2. Troque o tipo para **cheque pré-datado**. O valor presente cai, porque o spread sobe de 1,5% para
+   2,5% ao mês. Mais risco, mais deságio.
+3. Mude o vencimento para 45 dias. O prazo vira 1,5 mês comercial e o valor sobe para **R$ 9.636,39** —
+   note que não é a média entre 30 e 60 dias, porque o desconto é composto.
+4. Troque a moeda de pagamento para **USD**. O líquido passa a **US$ 1.756,10**, com a cotação
+   aplicada visível abaixo do valor. A conversão entra no fim, sobre o valor presente.
+5. Preencha a referência e o número do documento, e clique em **Registrar operação**. A operação nasce
+   **Pendente**.
+6. Clique em **Liquidar agora** — vira **Liquidada**. Clique em **Novo lote** e tente registrar de novo
+   com a mesma referência: o `409` aparece no topo, porque referência é chave de idempotência.
+
+**Extrato de liquidação** (http://localhost:3000/transacoes)
+
+7. Os totais no topo vêm separados por par de moedas — somar BRL com USD numa cifra só não
+   significaria nada.
+8. Filtre por moeda ou cedente. Repare que **a URL muda junto**: o extrato filtrado é um link
+   compartilhável, e o botão voltar desfaz o filtro.
+9. Ordene por **Líquido**. Aparece um aviso de que a ordenação está comparando moedas diferentes.
+   Aplique o filtro de moeda e o aviso some.
+10. As operações pendentes ficam no fim da lista, com `—` na data de liquidação.
+
+**Casos de erro que valem ver**
+
+- Valor de face negativo: o erro aparece no campo, não num alerta genérico.
+- Vencimento anterior à emissão: o campo é marcado antes de qualquer chamada à API.
+- Título já vencido: a API recusa com `422` e a mensagem explica qual documento.
 
 ---
 
