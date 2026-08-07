@@ -6,14 +6,14 @@ export function useStatement(filters: ReportFilters) {
   return useQuery({
     queryKey: ['statement', filters],
     queryFn: () => endpoints.statement(filters),
-    // Trocar de pagina mantendo as linhas anteriores na tela evita o salto de altura da tabela.
+    // Trocar de página mantendo as linhas anteriores na tela evita o salto de altura da tabela.
     placeholderData: keepPreviousData,
   })
 }
 
 export function useStatementSummary(filters: ReportFilters) {
-  // Os totais dependem do recorte, mas nao da pagina nem da ordenacao: incluir esses campos na
-  // chave faria a mesma consulta rodar de novo a cada clique de paginacao.
+  // Os totais dependem do recorte, mas não da página nem da ordenação: incluir esses campos na
+  // chave faria a mesma consulta rodar de novo a cada clique de paginação.
   const scope = {
     from: filters.from,
     to: filters.to,

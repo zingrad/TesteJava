@@ -5,8 +5,8 @@ interface Props {
 }
 
 /**
- * Erro de validacao ja aparece campo a campo no formulario; repetir aqui so faria ruido. O que sobe
- * para o topo e o que o operador nao consegue resolver no input.
+ * Erro de validação já aparece campo a campo no formulário; repetir aqui só faria ruido. O que sobe
+ * para o topo é o que o operador não consegue resolver no input.
  */
 export function ErrorNotice({ error }: Props) {
   if (!error) {
@@ -20,14 +20,14 @@ export function ErrorNotice({ error }: Props) {
     return (
       <div className="notice error" role="alert">
         {error.detail}
-        {error.incident && <> Codigo do incidente: <code>{error.incident}</code>.</>}
+        {error.incident && <> Código do incidente: <code>{error.incident}</code>.</>}
       </div>
     )
   }
 
   return (
     <div className="notice error" role="alert">
-      Falha inesperada na interface. Recarregue a pagina e tente novamente.
+      Falha inesperada na interface. Recarregue a página e tente novamente.
     </div>
   )
 }

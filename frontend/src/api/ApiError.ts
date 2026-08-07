@@ -13,8 +13,8 @@ interface ProblemDetail {
 }
 
 /**
- * Traduz o corpo RFC 7807 devolvido pela API. O `code` e o contrato estavel entre back e front —
- * a mensagem pode mudar de redacao, o codigo nao — entao e nele que a UI decide comportamento.
+ * Traduz o corpo RFC 7807 devolvido pela API. O `code` é o contrato estável entre back e front —
+ * a mensagem pode mudar de redação, o código não — então e nele que a UI decide comportamento.
  */
 export class ApiError extends Error {
   readonly status: number
@@ -46,7 +46,7 @@ export class ApiError extends Error {
   static network(): ApiError {
     return new ApiError(0, {
       code: 'NETWORK_UNAVAILABLE',
-      detail: 'Nao foi possivel alcancar a API. Verifique se o backend esta no ar.',
+      detail: 'Não foi possível alcancar a API. Verifique se o backend esta no ar.',
     })
   }
 

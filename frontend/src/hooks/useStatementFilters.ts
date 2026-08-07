@@ -10,7 +10,7 @@ const SORTS: ReportSort[] = ['SETTLED_AT', 'REQUESTED_AT', 'NET_AMOUNT', 'FACE_V
 const STATUSES: SettlementStatus[] = ['PENDING', 'SETTLED', 'CANCELLED']
 
 /** Os mesmos tamanhos oferecidos no seletor. Um valor fora da lista viria da URL e deixaria o
- * controle exibindo uma opcao que nao corresponde ao que a tabela esta mostrando. */
+ * controle exibindo uma opção que não corresponde ao que a tabela esta mostrando. */
 export const PAGE_SIZES = [10, 25, 50]
 
 function readEnum<T extends string>(value: string | null, allowed: T[]): T | undefined {
@@ -18,8 +18,8 @@ function readEnum<T extends string>(value: string | null, allowed: T[]): T | und
 }
 
 /**
- * O recorte vive na query string, nao em estado local: o operador pode compartilhar o link de um
- * extrato filtrado, o botao voltar desfaz o filtro anterior e um F5 nao perde o contexto.
+ * O recorte vive na query string, não em estado local: o operador pode compartilhar o link de um
+ * extrato filtrado, o botão voltar desfaz o filtro anterior e um F5 não perde o contexto.
  */
 export function useStatementFilters() {
   const [params, setParams] = useSearchParams()
@@ -42,8 +42,8 @@ export function useStatementFilters() {
   }, [params])
 
   /**
-   * Mudar qualquer filtro volta para a primeira pagina. Sem isso, restringir o recorte estando na
-   * pagina 4 deixaria o operador olhando uma tabela vazia sem entender por que.
+   * Mudar qualquer filtro volta para a primeira página. Sem isso, restringir o recorte estando na
+   * página 4 deixaria o operador olhando uma tabela vazia sem entender por que.
    */
   const update = useCallback(
     (patch: Partial<ReportFilters>) => {

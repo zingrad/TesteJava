@@ -25,9 +25,9 @@ export function ReceivableRows({
   return (
     <div className="card">
       <div className="card-title">
-        <h2>Titulos do lote</h2>
+        <h2>Títulos do lote</h2>
         <p>
-          {items.length} {items.length === 1 ? 'titulo' : 'titulos'}
+          {items.length} {items.length === 1 ? 'título' : 'títulos'}
         </p>
       </div>
 
@@ -82,7 +82,7 @@ export function ReceivableRows({
               </div>
 
               <div className="field">
-                <label htmlFor={`issue-${item.key}`}>Emissao</label>
+                <label htmlFor={`issue-${item.key}`}>Emissão</label>
                 <input
                   id={`issue-${item.key}`}
                   type="date"
@@ -100,7 +100,7 @@ export function ReceivableRows({
                   aria-invalid={datesInverted ? 'true' : undefined}
                   onChange={(event) => onChange(item.key, 'dueDate', event.target.value)}
                 />
-                {datesInverted && <span className="error">deve ser posterior a emissao</span>}
+                {datesInverted && <span className="error">deve ser posterior a emissão</span>}
               </div>
 
               <button
@@ -108,7 +108,7 @@ export function ReceivableRows({
                 className="row-remove"
                 onClick={() => onRemove(item.key)}
                 disabled={items.length === 1}
-                aria-label={`Remover titulo ${index + 1}`}
+                aria-label={`Remover título ${index + 1}`}
               >
                 Remover
               </button>
@@ -118,7 +118,7 @@ export function ReceivableRows({
       </div>
 
       <button type="button" onClick={onAdd} style={{ marginTop: 12 }}>
-        Adicionar titulo
+        Adicionar título
       </button>
     </div>
   )

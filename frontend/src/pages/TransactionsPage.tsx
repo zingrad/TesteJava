@@ -18,9 +18,9 @@ export function TransactionsPage() {
   const page = statement.data
 
   /**
-   * Um link compartilhado pode apontar para uma pagina que nao existe mais, seja porque o recorte
-   * mudou ou porque as linhas foram removidas. Em vez de exibir "nenhuma operacao" sobre um total
-   * que claramente nao e zero, a grade volta sozinha para a ultima pagina valida.
+   * Um link compartilhado pode apontar para uma página que não existe mais, seja porque o recorte
+   * mudou ou porque as linhas foram removidas. Em vez de exibir "nenhuma operação" sobre um total
+   * que claramente não e zero, a grade volta sozinha para a última página valida.
    */
   useEffect(() => {
     if (page && page.content.length === 0 && page.totalElements > 0 && page.page > 0) {
@@ -31,8 +31,8 @@ export function TransactionsPage() {
   return (
     <>
       <div className="card-title">
-        <h1>Extrato de liquidacao</h1>
-        <p>Paginacao e filtros resolvidos no servidor</p>
+        <h1>Extrato de liquidação</h1>
+        <p>Paginação e filtros resolvidos no servidor</p>
       </div>
 
       <ErrorNotice error={statement.error ?? summary.error} />

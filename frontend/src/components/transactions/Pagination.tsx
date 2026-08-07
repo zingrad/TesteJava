@@ -25,12 +25,12 @@ export function Pagination({
       <span className="muted">
         {totalElements === 0
           ? 'Nenhum resultado'
-          : `${first}–${last} de ${totalElements} ${totalElements === 1 ? 'operacao' : 'operacoes'}`}
+          : `${first}–${last} de ${totalElements} ${totalElements === 1 ? 'operação' : 'operações'}`}
       </span>
 
       <div className="pagination-controls">
         <label className="muted tiny" htmlFor="page-size">
-          Por pagina
+          Por página
         </label>
         <select
           id="page-size"
@@ -55,7 +55,7 @@ export function Pagination({
           onClick={() => onPageChange(page + 1)}
           disabled={page + 1 >= totalPages}
         >
-          Proxima
+          Próxima
         </button>
       </div>
     </div>

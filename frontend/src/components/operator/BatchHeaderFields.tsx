@@ -16,12 +16,12 @@ export function BatchHeaderFields({ header, currencies, assignors, violationFor,
   return (
     <div className="card">
       <div className="card-title">
-        <h2>Dados da operacao</h2>
+        <h2>Dados da operação</h2>
       </div>
 
       <div className="header-fields">
         <div className="field">
-          <label htmlFor="reference">Referencia</label>
+          <label htmlFor="reference">Referência</label>
           <input
             id="reference"
             value={header.reference}
@@ -48,7 +48,7 @@ export function BatchHeaderFields({ header, currencies, assignors, violationFor,
         </div>
 
         <div className="field">
-          <label htmlFor="faceCurrency">Moeda dos titulos</label>
+          <label htmlFor="faceCurrency">Moeda dos títulos</label>
           <select
             id="faceCurrency"
             value={header.faceCurrency}

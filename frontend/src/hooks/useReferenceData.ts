@@ -2,8 +2,8 @@ import { useQuery } from '@tanstack/react-query'
 import { endpoints } from '../api/endpoints'
 
 /**
- * Moedas, tipos de recebivel e cedentes mudam em ritmo de cadastro, nao de operacao. Ficam em cache
- * por bastante tempo para o painel nao rebuscar a cada tecla digitada na simulacao.
+ * Moedas, tipos de recebível e cedentes mudam em ritmo de cadastro, não de operação. Ficam em cache
+ * por bastante tempo para o painel não rebuscar a cada tecla digitada na simulação.
  */
 const REFERENCE_DATA_STALE_TIME = 15 * 60 * 1000
 

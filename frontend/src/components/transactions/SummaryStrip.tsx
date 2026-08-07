@@ -6,8 +6,8 @@ interface Props {
 }
 
 /**
- * Uma linha por par de moedas. Consolidar tudo num numero so exigiria converter valores de moedas
- * diferentes num cambio arbitrario — o extrato nao inventa cotacao que a operacao nao usou.
+ * Uma linha por par de moedas. Consolidar tudo num número só exigiria converter valores de moedas
+ * diferentes num câmbio arbitrário — o extrato não inventa cotação que a operação não usou.
  */
 export function SummaryStrip({ summary }: Props) {
   if (!summary || summary.length === 0) {
@@ -23,8 +23,8 @@ export function SummaryStrip({ summary }: Props) {
           </span>
           <span className="summary-main">{money(row.totalNetAmount, row.paymentCurrency)}</span>
           <span className="muted tiny">
-            {row.operations} {row.operations === 1 ? 'operacao' : 'operacoes'} &middot;{' '}
-            {row.receivables} {row.receivables === 1 ? 'titulo' : 'titulos'} &middot; face{' '}
+            {row.operations} {row.operations === 1 ? 'operação' : 'operações'} &middot;{' '}
+            {row.receivables} {row.receivables === 1 ? 'título' : 'títulos'} &middot; face{' '}
             {money(row.totalFaceValue, row.faceCurrency)}
           </span>
         </div>

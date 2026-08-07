@@ -12,7 +12,7 @@ export function usePricingSimulation(request: PricingSimulationRequest | null) {
     queryKey: ['pricing-simulation', debounced],
     queryFn: () => endpoints.simulate(debounced as PricingSimulationRequest),
     enabled: debounced !== null,
-    // Manter o resultado anterior enquanto a proxima simulacao chega evita a tabela piscar vazia
+    // Manter o resultado anterior enquanto a próxima simulação chega evita a tabela piscar vazia
     // a cada ajuste de valor.
     placeholderData: keepPreviousData,
   })

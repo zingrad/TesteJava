@@ -66,11 +66,11 @@ erDiagram
 
     CURRENCY        ||--o{ EXCHANGE_RATE   : "base"
     CURRENCY        ||--o{ EXCHANGE_RATE   : "quote"
-    CURRENCY        ||--o{ SETTLEMENT      : "moeda do titulo"
+    CURRENCY        ||--o{ SETTLEMENT      : "moeda do título"
     CURRENCY        ||--o{ SETTLEMENT      : "moeda de pagamento"
     ASSIGNOR        ||--o{ SETTLEMENT      : cede
     EXCHANGE_RATE   ||--o{ SETTLEMENT      : "taxa travada"
-    SETTLEMENT      ||--|{ SETTLEMENT_ITEM : contem
+    SETTLEMENT      ||--|{ SETTLEMENT_ITEM : contém
     RECEIVABLE_TYPE ||--o{ SETTLEMENT_ITEM : classifica
 ```
 

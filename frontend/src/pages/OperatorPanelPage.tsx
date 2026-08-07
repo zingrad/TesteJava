@@ -15,7 +15,7 @@ export function OperatorPanelPage() {
     <>
       <div className="card-title">
         <h1>Painel do operador</h1>
-        <p>Simulacao em tempo real e registro da operacao</p>
+        <p>Simulação em tempo real e registro da operação</p>
       </div>
 
       <ErrorNotice error={error} />

@@ -46,9 +46,9 @@ function isPositiveNumber(value: string): boolean {
 }
 
 /**
- * Toda a logica de estado e de montagem do payload vive aqui; os componentes so renderizam o que
- * este hook devolve. A simulacao so recebe um pedido quando o rascunho esta completo — mandar lote
- * pela metade so renderia 400 a cada tecla digitada.
+ * Toda a lógica de estado e de montagem do payload vive aqui; os componentes só renderizam o que
+ * este hook devolve. A simulação só recebe um pedido quando o rascunho esta completo — mandar lote
+ * pela metade só renderia 400 a cada tecla digitada.
  */
 export function useSettlementDraft(defaults: Defaults) {
   const [header, setHeader] = useState<DraftHeader>({
@@ -104,7 +104,7 @@ export function useSettlementDraft(defaults: Defaults) {
     return {
       faceCurrency: header.faceCurrency,
       paymentCurrency: header.paymentCurrency,
-      // A mesa pensa em percentual ao mes; a API trabalha em fracao decimal.
+      // A mesa pensa em percentual ao mês; a API trabalha em fração decimal.
       baseMonthlyRate: Number(header.baseMonthlyRatePercent) / 100,
       items: items.map((item) => ({
         documentNumber: item.documentNumber.trim() || 'SEM-NUMERO',

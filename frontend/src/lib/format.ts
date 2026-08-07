@@ -14,7 +14,7 @@ export function money(value: number, currency: string): string {
 }
 
 /**
- * Taxas trafegam como fracao decimal (0,015) e sao lidas pelo operador em percentual (1,5% a.m.).
+ * Taxas trafegam como fração decimal (0,015) e são lidas pelo operador em percentual (1,5% a.m.).
  */
 export function monthlyRate(value: number): string {
   return `${new Intl.NumberFormat('pt-BR', {

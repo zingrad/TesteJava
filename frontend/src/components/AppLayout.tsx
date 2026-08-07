@@ -8,14 +8,14 @@ export function AppLayout() {
       <header className="app-header">
         <div className="app-brand">
           <strong>SRM Credit Engine</strong>
-          <small>Mesa de operacoes &middot; cessao de credito multimoedas</small>
+          <small>Mesa de operações &middot; cessão de crédito multimoedas</small>
         </div>
         <nav className="app-nav">
           <NavLink to="/painel" className={navClass}>
             Painel do operador
           </NavLink>
-          <NavLink to="/transacoes" className={navClass}>
-            Transacoes
+          <NavLink to="/transações" className={navClass}>
+            Transações
           </NavLink>
         </nav>
       </header>
