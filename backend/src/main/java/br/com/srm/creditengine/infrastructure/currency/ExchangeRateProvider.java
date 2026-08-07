@@ -3,8 +3,8 @@ package br.com.srm.creditengine.infrastructure.currency;
 import java.util.List;
 
 /**
- * Fonte externa de cotacoes. A implementacao atual e simulada; trocar por um cliente HTTP real
- * nao exige mudanca na camada de negocio.
+ * Fonte externa de cotações. A implementação atual e simulada; trocar por um cliente HTTP real
+ * não exige mudança na camada de negócio.
  */
 public interface ExchangeRateProvider {
 

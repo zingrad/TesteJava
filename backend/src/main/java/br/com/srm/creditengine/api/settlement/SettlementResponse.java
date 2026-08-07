@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-@Schema(description = "Operacao de cessao registrada")
+@Schema(description = "Operação de cessão registrada")
 public record SettlementResponse(
 
         String reference,
@@ -19,7 +19,7 @@ public record SettlementResponse(
         String paymentCurrency,
         BigDecimal baseMonthlyRate,
 
-        @Schema(description = "Cotacao travada na operacao; ausente quando nao e cross-currency")
+        @Schema(description = "Cotação travada na operação; ausente quando não e cross-currency")
         BigDecimal exchangeRate,
 
         BigDecimal totalFaceValue,
@@ -48,7 +48,7 @@ public record SettlementResponse(
                 settlement.items().stream().map(Item::from).toList());
     }
 
-    @Schema(description = "Titulo do lote")
+    @Schema(description = "Título do lote")
     record Item(
             String documentNumber,
             String receivableTypeCode,

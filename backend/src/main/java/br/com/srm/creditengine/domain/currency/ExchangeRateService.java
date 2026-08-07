@@ -42,7 +42,7 @@ public class ExchangeRateService {
         OffsetDateTime moment = now();
         List<ProviderQuote> quotes = provider.latestQuotes();
         if (quotes.isEmpty()) {
-            throw new BusinessRuleException("FX_PROVIDER_EMPTY", "O provedor externo nao retornou cotacoes.");
+            throw new BusinessRuleException("FX_PROVIDER_EMPTY", "O provedor externo não retornou cotações.");
         }
         return quotes.stream()
                 .map(quote -> save(quote.baseCurrency(), quote.quoteCurrency(), quote.rate(),
@@ -56,7 +56,7 @@ public class ExchangeRateService {
         String normalizedQuote = normalize(quote);
         return rates.findEffectiveAt(normalizedBase, normalizedQuote, now(), ONLY_LATEST)
                 .orElseThrow(() -> new BusinessRuleException("FX_RATE_UNAVAILABLE",
-                        "Nao existe cotacao vigente para o par %s/%s.".formatted(normalizedBase, normalizedQuote)));
+                        "Não existe cotação vigente para o par %s/%s.".formatted(normalizedBase, normalizedQuote)));
     }
 
     @Transactional(readOnly = true)
@@ -65,8 +65,8 @@ public class ExchangeRateService {
     }
 
     /**
-     * Conversao entre moedas iguais e identidade: nao ha cotacao a buscar nem arredondamento a aplicar
-     * alem do ajuste de escala da propria moeda.
+     * Conversão entre moedas iguais e identidade: não ha cotação a buscar nem arredondamento a aplicar
+     * além do ajuste de escala da própria moeda.
      */
     @Transactional(readOnly = true)
     public ConvertedAmount convert(BigDecimal amount, String base, String quote) {
@@ -90,7 +90,7 @@ public class ExchangeRateService {
         String normalizedQuote = normalize(quote);
         if (normalizedBase.equals(normalizedQuote)) {
             throw new BusinessRuleException("FX_SAME_CURRENCY",
-                    "Nao faz sentido cotar uma moeda contra ela mesma.");
+                    "Não faz sentido cotar uma moeda contra ela mesma.");
         }
         return rates.save(new ExchangeRate(
                 currencies.require(normalizedBase), currencies.require(normalizedQuote),

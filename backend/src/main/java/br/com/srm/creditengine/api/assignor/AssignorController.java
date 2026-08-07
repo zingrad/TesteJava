@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/assignors")
-@Tag(name = "Liquidacao")
+@Tag(name = "Liquidação")
 class AssignorController {
 
     private final AssignorService assignors;
@@ -27,7 +27,7 @@ class AssignorController {
         return assignors.listAll().stream().map(AssignorResponse::from).toList();
     }
 
-    @Schema(description = "Cedente dos recebiveis")
+    @Schema(description = "Cedente dos recebíveis")
     record AssignorResponse(Long id, String taxId, String legalName) {
 
         static AssignorResponse from(Assignor assignor) {

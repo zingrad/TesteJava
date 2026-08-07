@@ -38,13 +38,13 @@ public class ApiErrorHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ProblemDetail onResourceNotFound(ResourceNotFoundException ex) {
-        return problem(HttpStatus.NOT_FOUND, "Recurso nao encontrado", ex.getMessage(), ex.code());
+        return problem(HttpStatus.NOT_FOUND, "Recurso não encontrado", ex.getMessage(), ex.code());
     }
 
     @ExceptionHandler(BusinessRuleException.class)
     public ProblemDetail onBusinessRule(BusinessRuleException ex) {
         log.info("Business rule rejected the request [code={}]: {}", ex.code(), ex.getMessage());
-        return problem(HttpStatus.UNPROCESSABLE_ENTITY, "Regra de negocio violada", ex.getMessage(), ex.code());
+        return problem(HttpStatus.UNPROCESSABLE_ENTITY, "Regra de negócio violada", ex.getMessage(), ex.code());
     }
 
     @ExceptionHandler(ConflictException.class)
@@ -56,8 +56,8 @@ public class ApiErrorHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(OptimisticLockingFailureException.class)
     public ProblemDetail onOptimisticLocking(OptimisticLockingFailureException ex) {
         log.warn("Concurrent modification detected", ex);
-        return problem(HttpStatus.CONFLICT, "Conflito de concorrencia",
-                "O registro foi alterado por outra operacao. Recarregue os dados e tente novamente.",
+        return problem(HttpStatus.CONFLICT, "Conflito de concorrência",
+                "O registro foi alterado por outra operação. Recarregue os dados e tente novamente.",
                 "CONCURRENT_MODIFICATION");
     }
 
@@ -65,7 +65,7 @@ public class ApiErrorHandler extends ResponseEntityExceptionHandler {
     public ProblemDetail onDataIntegrityViolation(DataIntegrityViolationException ex) {
         log.warn("Database rejected the write", ex);
         return problem(HttpStatus.CONFLICT, "Conflito de dados",
-                "A operacao viola uma restricao de integridade dos dados.",
+                "A operação viola uma restrição de integridade dos dados.",
                 "DATA_INTEGRITY_VIOLATION");
     }
 
@@ -84,7 +84,7 @@ public class ApiErrorHandler extends ResponseEntityExceptionHandler {
         log.error("Unhandled failure [incident={}]", incident, ex);
 
         ProblemDetail problem = problem(HttpStatus.INTERNAL_SERVER_ERROR, "Erro interno",
-                "Falha inesperada ao processar a requisicao. Informe o codigo do incidente ao suporte.",
+                "Falha inesperada ao processar a requisição. Informe o código do incidente ao suporte.",
                 "INTERNAL_ERROR");
         problem.setProperty("incident", incident);
         return problem;
@@ -119,14 +119,14 @@ public class ApiErrorHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleNoResourceFoundException(
             NoResourceFoundException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 
-        ProblemDetail problem = problem(HttpStatus.NOT_FOUND, "Endpoint nao encontrado",
+        ProblemDetail problem = problem(HttpStatus.NOT_FOUND, "Endpoint não encontrado",
                 "Nenhum endpoint atende %s %s.".formatted(ex.getHttpMethod(), absolute(ex.getResourcePath())),
                 "ENDPOINT_NOT_FOUND");
         return handleExceptionInternal(ex, problem, headers, HttpStatus.NOT_FOUND, request);
     }
 
     /**
-     * As excecoes que o proprio Spring resolve trazem o {@link ProblemDetail} pronto, sem passar por
+     * As exceções que o próprio Spring resolve trazem o {@link ProblemDetail} pronto, sem passar por
      * {@code createProblemDetail}. Enriquecer aqui garante que toda resposta de erro tenha o mesmo contrato.
      */
     @Override
@@ -145,8 +145,8 @@ public class ApiErrorHandler extends ResponseEntityExceptionHandler {
     }
 
     private ProblemDetail validationProblem(List<FieldViolation> violations) {
-        ProblemDetail problem = problem(HttpStatus.BAD_REQUEST, "Requisicao invalida",
-                "Um ou mais campos falharam na validacao.", "VALIDATION_FAILED");
+        ProblemDetail problem = problem(HttpStatus.BAD_REQUEST, "Requisição inválida",
+                "Um ou mais campos falharam na validação.", "VALIDATION_FAILED");
         problem.setProperty("violations", violations);
         return problem;
     }
@@ -172,7 +172,7 @@ public class ApiErrorHandler extends ResponseEntityExceptionHandler {
     }
 
     private static String messageOf(FieldError error) {
-        return error.getDefaultMessage() == null ? "valor invalido" : error.getDefaultMessage();
+        return error.getDefaultMessage() == null ? "valor inválido" : error.getDefaultMessage();
     }
 
     private static String lastNode(ConstraintViolation<?> violation) {

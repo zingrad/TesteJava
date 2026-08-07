@@ -3,7 +3,7 @@ package br.com.srm.creditengine.domain.pricing;
 import org.springframework.stereotype.Component;
 
 /**
- * Cheque pre-datado: sem lastro em nota fiscal, carrega o spread mais alto do cadastro (2,5% a.m.).
+ * Cheque pré-datado: sem lastro em nota fiscal, carrega o spread mais alto do cadastro (2,5% a.m.).
  */
 @Component
 class PostDatedCheckStrategy extends ConfiguredSpreadStrategy {

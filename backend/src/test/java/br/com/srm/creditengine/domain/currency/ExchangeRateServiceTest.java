@@ -50,7 +50,7 @@ class ExchangeRateServiceTest {
     @BeforeEach
     void setUp() {
         brl = currency("BRL", "Real brasileiro", (short) 2);
-        usd = currency("USD", "Dolar norte-americano", (short) 2);
+        usd = currency("USD", "Dólar norte-americano", (short) 2);
 
         when(currencies.require("BRL")).thenReturn(brl);
         when(currencies.require("USD")).thenReturn(usd);
@@ -125,9 +125,9 @@ class ExchangeRateServiceTest {
     }
 
     /**
-     * Meia unidade exata e o unico caso em que HALF_EVEN e HALF_UP divergem: 10.005 desce para 10.00
+     * Meia unidade exata é o único caso em que HALF_EVEN e HALF_UP divergem: 10.005 desce para 10.00
      * porque 0 e par, enquanto 10.015 sobe para 10.02. E o comportamento desejado — arredondar sempre
-     * para cima introduziria vies de alta no caixa ao longo de muitas conversoes.
+     * para cima introduziria viés de alta no caixa ao longo de muitas conversoes.
      */
     @Test
     void breaksExactHalvesTowardsTheEvenDigit() {

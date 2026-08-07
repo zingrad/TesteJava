@@ -26,11 +26,11 @@ public class ReceivableTypeService {
     public ReceivableType requireActive(String code) {
         String normalized = code.trim().toUpperCase(Locale.ROOT);
         ReceivableType type = types.findById(normalized)
-                .orElseThrow(() -> new ResourceNotFoundException("Tipo de recebivel", normalized));
+                .orElseThrow(() -> new ResourceNotFoundException("Tipo de recebível", normalized));
 
         if (!type.active()) {
             throw new BusinessRuleException("RECEIVABLE_TYPE_INACTIVE",
-                    "O tipo de recebivel %s nao esta mais disponivel para operacao.".formatted(normalized));
+                    "O tipo de recebível %s não esta mais disponível para operação.".formatted(normalized));
         }
         return type;
     }

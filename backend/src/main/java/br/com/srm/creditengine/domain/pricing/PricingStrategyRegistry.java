@@ -28,7 +28,7 @@ public class PricingStrategyRegistry {
         PricingStrategy strategy = byReceivableType.get(receivableTypeCode);
         if (strategy == null) {
             throw new BusinessRuleException("PRICING_STRATEGY_MISSING",
-                    "Nao ha regra de precificacao para o tipo de recebivel %s.".formatted(receivableTypeCode));
+                    "Não ha regra de precificação para o tipo de recebível %s.".formatted(receivableTypeCode));
         }
         return strategy;
     }

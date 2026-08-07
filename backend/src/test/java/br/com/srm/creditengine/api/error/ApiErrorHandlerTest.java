@@ -51,7 +51,7 @@ class ApiErrorHandlerTest {
         mockMvc.perform(get("/stub/business-rule"))
                 .andExpect(status().isUnprocessableEntity())
                 .andExpect(jsonPath("$.code").value("FX_RATE_UNAVAILABLE"))
-                .andExpect(jsonPath("$.detail").value("Sem cotacao vigente para o par informado."));
+                .andExpect(jsonPath("$.detail").value("Sem cotação vigente para o par informado."));
     }
 
     @Test
@@ -136,7 +136,7 @@ class ApiErrorHandlerTest {
 
         @GetMapping("/business-rule")
         void businessRule() {
-            throw new BusinessRuleException("FX_RATE_UNAVAILABLE", "Sem cotacao vigente para o par informado.");
+            throw new BusinessRuleException("FX_RATE_UNAVAILABLE", "Sem cotação vigente para o par informado.");
         }
 
         @GetMapping("/stale")

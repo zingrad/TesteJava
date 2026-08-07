@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/receivable-types")
-@Tag(name = "Precificacao")
+@Tag(name = "Precificação")
 class ReceivableTypeController {
 
     private final ReceivableTypeService receivableTypes;
@@ -23,12 +23,12 @@ class ReceivableTypeController {
     }
 
     @GetMapping
-    @Operation(summary = "Lista os tipos de recebivel disponiveis para operacao")
+    @Operation(summary = "Lista os tipos de recebível disponíveis para operação")
     List<ReceivableTypeResponse> list() {
         return receivableTypes.listActive().stream().map(ReceivableTypeResponse::from).toList();
     }
 
-    @Schema(description = "Tipo de recebivel e seu spread de risco")
+    @Schema(description = "Tipo de recebível e seu spread de risco")
     record ReceivableTypeResponse(String code, String name, BigDecimal monthlySpread) {
 
         static ReceivableTypeResponse from(ReceivableType type) {

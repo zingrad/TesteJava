@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/settlements")
-@Tag(name = "Liquidacao")
+@Tag(name = "Liquidação")
 class SettlementController {
 
     private final SettlementService settlements;
@@ -28,14 +28,14 @@ class SettlementController {
     }
 
     @PostMapping
-    @Operation(summary = "Registra um lote para liquidacao",
-            description = "Precifica e grava o lote na mesma transacao, com status PENDING. "
-                    + "Reenviar a mesma referencia nao cria uma segunda operacao.")
+    @Operation(summary = "Registra um lote para liquidação",
+            description = "Precifica e grava o lote na mesma transação, com status PENDING. "
+                    + "Reenviar a mesma referência não cria uma segunda operação.")
     @ApiResponses({
             @ApiResponse(responseCode = "201", description = "Lote registrado"),
             @ApiResponse(responseCode = "404", description = "Cedente, moeda ou tipo desconhecido", content = @Content),
-            @ApiResponse(responseCode = "409", description = "Referencia ja registrada", content = @Content),
-            @ApiResponse(responseCode = "422", description = "Lote recusado por regra de negocio", content = @Content)})
+            @ApiResponse(responseCode = "409", description = "Referência já registrada", content = @Content),
+            @ApiResponse(responseCode = "422", description = "Lote recusado por regra de negócio", content = @Content)})
     ResponseEntity<SettlementResponse> register(@Valid @RequestBody RegisterSettlementRequest request) {
         SettlementResponse created = SettlementResponse.from(settlements.register(request.toDomain()));
 
@@ -45,29 +45,29 @@ class SettlementController {
     }
 
     @GetMapping("/{reference}")
-    @Operation(summary = "Consulta uma operacao pela referencia")
+    @Operation(summary = "Consulta uma operação pela referência")
     SettlementResponse find(@PathVariable String reference) {
         return SettlementResponse.from(settlements.findByReference(reference));
     }
 
     @PostMapping("/{reference}/settle")
-    @Operation(summary = "Liquida a operacao",
-            description = "Transicao unica e protegida por lock otimista: duas chamadas simultaneas "
-                    + "nao liquidam a mesma operacao duas vezes.")
+    @Operation(summary = "Liquida a operação",
+            description = "Transição única e protegida por lock otimista: duas chamadas simultaneas "
+                    + "não liquidam a mesma operação duas vezes.")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Operacao liquidada"),
-            @ApiResponse(responseCode = "404", description = "Referencia desconhecida", content = @Content),
-            @ApiResponse(responseCode = "409", description = "Operacao ja liquidada, cancelada ou em disputa", content = @Content)})
+            @ApiResponse(responseCode = "200", description = "Operação liquidada"),
+            @ApiResponse(responseCode = "404", description = "Referência desconhecida", content = @Content),
+            @ApiResponse(responseCode = "409", description = "Operação já liquidada, cancelada ou em disputa", content = @Content)})
     SettlementResponse settle(@PathVariable String reference) {
         return SettlementResponse.from(settlements.settle(reference));
     }
 
     @PostMapping("/{reference}/cancel")
-    @Operation(summary = "Cancela uma operacao ainda pendente")
+    @Operation(summary = "Cancela uma operação ainda pendente")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Operacao cancelada"),
-            @ApiResponse(responseCode = "404", description = "Referencia desconhecida", content = @Content),
-            @ApiResponse(responseCode = "409", description = "Operacao nao esta mais pendente", content = @Content)})
+            @ApiResponse(responseCode = "200", description = "Operação cancelada"),
+            @ApiResponse(responseCode = "404", description = "Referência desconhecida", content = @Content),
+            @ApiResponse(responseCode = "409", description = "Operação não esta mais pendente", content = @Content)})
     SettlementResponse cancel(@PathVariable String reference) {
         return SettlementResponse.from(settlements.cancel(reference));
     }

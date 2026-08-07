@@ -22,14 +22,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Relatorios sao o caminho de duas camadas autorizado pelo item 6 do desafio: o controller fala
- * direto com o reader de SQL nativo, sem servico de negocio no meio, porque nao ha regra a aplicar —
- * so um recorte de dados.
+ * Relatórios são o caminho de duas camadas autorizado pelo item 6 do desafio: o controller fala
+ * direto com o reader de SQL nativo, sem servico de negócio no meio, porque não ha regra a aplicar —
+ * só um recorte de dados.
  */
 @RestController
 @RequestMapping("/api/reports/settlements")
 @Validated
-@Tag(name = "Relatorios")
+@Tag(name = "Relatórios")
 class SettlementReportController {
 
     private final SettlementReportReader reader;
@@ -39,23 +39,23 @@ class SettlementReportController {
     }
 
     @GetMapping
-    @Operation(summary = "Extrato de liquidacao",
-            description = "Recorte por periodo, cedente e moeda, paginado no servidor. As datas sao "
+    @Operation(summary = "Extrato de liquidação",
+            description = "Recorte por período, cedente e moeda, paginado no servidor. As datas são "
                     + "inclusivas nas duas pontas, interpretadas em UTC e aplicadas sobre a data de "
-                    + "liquidacao — operacoes ainda pendentes nao tem essa data e ficam fora de "
-                    + "qualquer recorte por periodo.")
+                    + "liquidação — operações ainda pendentes não tem essa data e ficam fora de "
+                    + "qualquer recorte por período.")
     PageResponse<SettlementReportRow> statement(
-            @Parameter(description = "Inicio do periodo, inclusivo")
+            @Parameter(description = "Início do período, inclusivo")
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
 
-            @Parameter(description = "Fim do periodo, inclusivo")
+            @Parameter(description = "Fim do período, inclusivo")
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to,
 
-            @Parameter(description = "CNPJ do cedente, com ou sem pontuacao")
+            @Parameter(description = "CNPJ do cedente, com ou sem pontuação")
             @RequestParam(required = false) String assignorTaxId,
 
             @RequestParam(required = false) @Pattern(regexp = "^[A-Za-z]{3}$",
-                    message = "deve ser um codigo ISO 4217 de tres letras") String paymentCurrency,
+                    message = "deve ser um código ISO 4217 de três letras") String paymentCurrency,
 
             @RequestParam(required = false) @Pattern(regexp = "^(?i)(PENDING|SETTLED|CANCELLED)$",
                     message = "deve ser PENDING, SETTLED ou CANCELLED") String status,
@@ -72,14 +72,14 @@ class SettlementReportController {
     @GetMapping("/summary")
     @Operation(summary = "Totais consolidados do extrato",
             description = "Mesmos filtros do extrato, agregados por par de moedas. O valor de face e o "
-                    + "valor presente estao na moeda do titulo; o liquido, na moeda de pagamento.")
+                    + "valor presente estão na moeda do título; o liquido, na moeda de pagamento.")
     List<SettlementSummaryRow> summary(
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to,
             @RequestParam(required = false) String assignorTaxId,
 
             @RequestParam(required = false) @Pattern(regexp = "^[A-Za-z]{3}$",
-                    message = "deve ser um codigo ISO 4217 de tres letras") String paymentCurrency,
+                    message = "deve ser um código ISO 4217 de três letras") String paymentCurrency,
 
             @RequestParam(required = false) @Pattern(regexp = "^(?i)(PENDING|SETTLED|CANCELLED)$",
                     message = "deve ser PENDING, SETTLED ou CANCELLED") String status) {

@@ -133,7 +133,7 @@ class SettlementTest {
         Assignor assignor = BeanUtils.instantiateClass(Assignor.class);
         ReflectionTestUtils.setField(assignor, "id", 1L);
         ReflectionTestUtils.setField(assignor, "taxId", "11222333000181");
-        ReflectionTestUtils.setField(assignor, "legalName", "Metalurgica Aurora LTDA");
+        ReflectionTestUtils.setField(assignor, "legalName", "Metalúrgica Aurora LTDA");
         return assignor;
     }
 

@@ -42,15 +42,15 @@ public class SettlementService {
     }
 
     /**
-     * Precifica e registra o lote na mesma transacao. Se qualquer titulo for recusado, nada e
-     * gravado: o lote nao existe pela metade.
+     * Precifica e registra o lote na mesma transação. Se qualquer título for recusado, nada e
+     * gravado: o lote não existe pela metade.
      */
     @Transactional
     public Settlement register(SettlementRegistration registration) {
         String reference = normalize(registration.reference());
         if (settlements.existsByReference(reference)) {
             throw new ConflictException("SETTLEMENT_ALREADY_REGISTERED",
-                    "Ja existe uma operacao registrada com a referencia %s.".formatted(reference));
+                    "Já existe uma operação registrada com a referência %s.".formatted(reference));
         }
 
         Assignor assignor = assignors.requireByTaxId(registration.assignorTaxId());
@@ -74,8 +74,8 @@ public class SettlementService {
     }
 
     /**
-     * A transicao usa o lock otimista da coluna {@code version}: duas chamadas simultaneas para a
-     * mesma operacao disputam o mesmo UPDATE, e a perdedora recebe conflito em vez de liquidar duas vezes.
+     * A transição usa o lock otimista da coluna {@code version}: duas chamadas simultaneas para a
+     * mesma operação disputam o mesmo UPDATE, e a perdedora recebe conflito em vez de liquidar duas vezes.
      */
     @Transactional
     public Settlement settle(String reference) {
@@ -99,11 +99,11 @@ public class SettlementService {
     private Settlement require(String reference) {
         String normalized = normalize(reference);
         return settlements.findByReference(normalized)
-                .orElseThrow(() -> new ResourceNotFoundException("Operacao", normalized));
+                .orElseThrow(() -> new ResourceNotFoundException("Operação", normalized));
     }
 
     /**
-     * A referencia e a chave de idempotencia do cliente, entao precisa casar na gravacao e na busca.
+     * A referência é a chave de idempotência do cliente, então precisa casar na gravação e na busca.
      */
     private static String normalize(String reference) {
         return reference.trim().toUpperCase(Locale.ROOT);

@@ -81,7 +81,7 @@ class ExchangeRateControllerTest {
                                 {"baseCurrency": "DOLAR", "quoteCurrency": "BRL", "rate": 5.42}"""))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.violations[0].field").value("baseCurrency"))
-                .andExpect(jsonPath("$.violations[0].message").value("deve ser um codigo ISO 4217 de tres letras"));
+                .andExpect(jsonPath("$.violations[0].message").value("deve ser um código ISO 4217 de três letras"));
     }
 
     @Test
@@ -92,13 +92,13 @@ class ExchangeRateControllerTest {
                                 {"baseCurrency": "USD", "quoteCurrency": "BRL", "rate": 5.4212345678}"""))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.violations[0].field").value("rate"))
-                .andExpect(jsonPath("$.violations[0].message").value("aceita no maximo 8 casas decimais"));
+                .andExpect(jsonPath("$.violations[0].message").value("aceita no máximo 8 casas decimais"));
     }
 
     @Test
     void missingQuoteForThePairSurfacesAsUnprocessableEntity() throws Exception {
         when(service.currentRate("USD", "JPY"))
-                .thenThrow(new BusinessRuleException("FX_RATE_UNAVAILABLE", "Nao existe cotacao vigente."));
+                .thenThrow(new BusinessRuleException("FX_RATE_UNAVAILABLE", "Não existe cotação vigente."));
 
         mockMvc.perform(get("/api/exchange-rates/current").param("base", "USD").param("quote", "JPY"))
                 .andExpect(status().isUnprocessableEntity())

@@ -26,14 +26,14 @@ import org.springframework.transaction.annotation.Transactional;
 public class PricingService {
 
     /**
-     * Prazo em meses comerciais de 30 dias, convencao usual em operacoes de desconto no mercado
-     * brasileiro. Um titulo de 45 dias vale 1,5 mes, e nao 1 mes arredondado.
+     * Prazo em meses comerciais de 30 dias, convenção usual em operações de desconto no mercado
+     * brasileiro. Um título de 45 dias vale 1,5 mês, e não 1 mês arredondado.
      */
     private static final BigDecimal DAYS_IN_COMMERCIAL_MONTH = new BigDecimal("30");
 
     /**
-     * Precisao intermediaria bem acima da escala de armazenamento: o arredondamento acontece uma
-     * unica vez, no valor final de cada titulo, e nao se acumula ao longo da potenciacao.
+     * Precisão intermediaria bem acima da escala de armazenamento: o arredondamento acontece uma
+     * única vez, no valor final de cada título, e não se acumula ao longo da potenciação.
      */
     private static final MathContext CALCULATION = new MathContext(24, RoundingMode.HALF_EVEN);
 
@@ -55,7 +55,7 @@ public class PricingService {
     @Transactional(readOnly = true)
     public PricedBatch price(PricingOrder order) {
         if (order.items().isEmpty()) {
-            throw new BusinessRuleException("EMPTY_BATCH", "O lote nao contem nenhum titulo.");
+            throw new BusinessRuleException("EMPTY_BATCH", "O lote não contém nenhum título.");
         }
 
         String faceCurrency = normalize(order.faceCurrency());
@@ -100,13 +100,13 @@ public class PricingService {
 
         if (!item.dueDate().isAfter(item.issueDate())) {
             throw new BusinessRuleException("INVALID_TERM",
-                    "O vencimento do documento %s nao e posterior a emissao.".formatted(item.documentNumber()));
+                    "O vencimento do documento %s não e posterior a emissão.".formatted(item.documentNumber()));
         }
 
         int termDays = (int) ChronoUnit.DAYS.between(valuationDate, item.dueDate());
         if (termDays <= 0) {
             throw new BusinessRuleException("RECEIVABLE_NOT_DISCOUNTABLE",
-                    "O documento %s vence em %s e nao tem prazo a descontar."
+                    "O documento %s vence em %s e não tem prazo a descontar."
                             .formatted(item.documentNumber(), item.dueDate()));
         }
 
@@ -136,7 +136,7 @@ public class PricingService {
         BigDecimal growthFactor = BigDecimal.ONE.add(monthlyRate);
         if (growthFactor.signum() <= 0) {
             throw new BusinessRuleException("INVALID_DISCOUNT_RATE",
-                    "A taxa de desconto resultante torna o calculo indefinido.");
+                    "A taxa de desconto resultante torna o cálculo indefinido.");
         }
 
         BigDecimal termInMonths = new BigDecimal(termDays).divide(DAYS_IN_COMMERCIAL_MONTH, CALCULATION);
@@ -146,8 +146,8 @@ public class PricingService {
     }
 
     /**
-     * O total do lote soma os titulos ja arredondados, em vez de arredondar a soma. E o unico jeito
-     * de o cabecalho fechar com a linha a linha do extrato, que e o que a auditoria confere.
+     * O total do lote soma os títulos já arredondados, em vez de arredondar a soma. E o único jeito
+     * de o cabeçalho fechar com a linha a linha do extrato, que é o que a auditoria confere.
      */
     private static BigDecimal total(List<PricedReceivable> items,
             Function<PricedReceivable, BigDecimal> field) {

@@ -99,7 +99,7 @@ class PricingControllerTest {
                 {"faceCurrency": "BRL", "paymentCurrency": "BRL", "baseMonthlyRate": 0.01, "items": []}"""))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.code").value("VALIDATION_FAILED"))
-                .andExpect(jsonPath("$.violations[0].message").value("o lote precisa ter ao menos um titulo"));
+                .andExpect(jsonPath("$.violations[0].message").value("o lote precisa ter ao menos um título"));
 
         verify(pricing, never()).price(any());
     }

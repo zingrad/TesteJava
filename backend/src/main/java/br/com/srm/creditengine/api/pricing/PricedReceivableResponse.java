@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Schema(description = "Resultado da precificacao de um titulo")
+@Schema(description = "Resultado da precificação de um título")
 public record PricedReceivableResponse(
 
         String documentNumber,
@@ -14,16 +14,16 @@ public record PricedReceivableResponse(
         LocalDate issueDate,
         LocalDate dueDate,
 
-        @Schema(description = "Dias corridos entre a data de referencia e o vencimento")
+        @Schema(description = "Dias corridos entre a data de referência e o vencimento")
         int termDays,
 
-        @Schema(description = "Spread de risco do tipo de recebivel, ao mes")
+        @Schema(description = "Spread de risco do tipo de recebível, ao mês")
         BigDecimal appliedSpread,
 
-        @Schema(description = "Taxa base somada ao spread, ao mes")
+        @Schema(description = "Taxa base somada ao spread, ao mês")
         BigDecimal monthlyDiscountRate,
 
-        @Schema(description = "Valor presente na moeda do titulo")
+        @Schema(description = "Valor presente na moeda do título")
         BigDecimal presentValue,
 
         @Schema(description = "Valor presente convertido para a moeda de pagamento")

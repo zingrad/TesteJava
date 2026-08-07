@@ -6,23 +6,23 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
-@Schema(description = "Lote precificado, sem qualquer efeito de persistencia")
+@Schema(description = "Lote precificado, sem qualquer efeito de persistência")
 public record PricingSimulationResponse(
 
-        @Schema(description = "Data usada como referencia para o prazo de cada titulo")
+        @Schema(description = "Data usada como referência para o prazo de cada título")
         LocalDate valuationDate,
 
         String faceCurrency,
         String paymentCurrency,
         BigDecimal baseMonthlyRate,
 
-        @Schema(description = "Cotacao aplicada; 1 quando a operacao nao e cross-currency")
+        @Schema(description = "Cotação aplicada; 1 quando a operação não e cross-currency")
         BigDecimal exchangeRate,
 
         boolean crossCurrency,
         BigDecimal totalFaceValue,
 
-        @Schema(description = "Soma dos valores presentes, na moeda dos titulos")
+        @Schema(description = "Soma dos valores presentes, na moeda dos títulos")
         BigDecimal totalPresentValue,
 
         @Schema(description = "Soma dos valores liquidos, na moeda de pagamento")

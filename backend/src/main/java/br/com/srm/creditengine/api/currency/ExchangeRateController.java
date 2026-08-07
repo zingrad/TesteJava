@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/exchange-rates")
 @Validated
-@Tag(name = "Cambio")
+@Tag(name = "Câmbio")
 class ExchangeRateController {
 
     private static final String ISO_CODE = "^[A-Za-z]{3}$";
@@ -36,12 +36,12 @@ class ExchangeRateController {
     }
 
     @PostMapping
-    @Operation(summary = "Registra uma cotacao manualmente")
+    @Operation(summary = "Registra uma cotação manualmente")
     @ApiResponses({
-            @ApiResponse(responseCode = "201", description = "Cotacao registrada"),
+            @ApiResponse(responseCode = "201", description = "Cotação registrada"),
             @ApiResponse(responseCode = "404", description = "Moeda desconhecida", content = @Content),
-            @ApiResponse(responseCode = "409", description = "Ja existe cotacao do par nesse momento", content = @Content),
-            @ApiResponse(responseCode = "422", description = "Par de moedas invalido", content = @Content)})
+            @ApiResponse(responseCode = "409", description = "Já existe cotação do par nesse momento", content = @Content),
+            @ApiResponse(responseCode = "422", description = "Par de moedas inválido", content = @Content)})
     ResponseEntity<ExchangeRateResponse> register(@Valid @RequestBody RegisterExchangeRateRequest request) {
         ExchangeRateResponse created = ExchangeRateResponse.from(service.register(
                 request.baseCurrency(), request.quoteCurrency(), request.rate(), request.effectiveAt()));
@@ -52,17 +52,17 @@ class ExchangeRateController {
     }
 
     @PostMapping("/sync")
-    @Operation(summary = "Importa as cotacoes vigentes do provedor externo",
-            description = "A integracao e simulada: gera uma variacao em torno da referencia USD/BRL.")
+    @Operation(summary = "Importa as cotações vigentes do provedor externo",
+            description = "A integração e simulada: gera uma variação em torno da referência USD/BRL.")
     List<ExchangeRateResponse> sync() {
         return service.syncFromProvider().stream().map(ExchangeRateResponse::from).toList();
     }
 
     @GetMapping("/current")
-    @Operation(summary = "Cotacao vigente de um par")
+    @Operation(summary = "Cotação vigente de um par")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Cotacao vigente"),
-            @ApiResponse(responseCode = "422", description = "Par sem cotacao vigente", content = @Content)})
+            @ApiResponse(responseCode = "200", description = "Cotação vigente"),
+            @ApiResponse(responseCode = "422", description = "Par sem cotação vigente", content = @Content)})
     ExchangeRateResponse current(
             @RequestParam @Pattern(regexp = ISO_CODE) String base,
             @RequestParam @Pattern(regexp = ISO_CODE) String quote) {
@@ -71,7 +71,7 @@ class ExchangeRateController {
     }
 
     @GetMapping
-    @Operation(summary = "Historico de cotacoes de um par, da mais recente para a mais antiga")
+    @Operation(summary = "Histórico de cotações de um par, da mais recente para a mais antiga")
     List<ExchangeRateResponse> history(
             @RequestParam @Pattern(regexp = ISO_CODE) String base,
             @RequestParam @Pattern(regexp = ISO_CODE) String quote,

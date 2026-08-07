@@ -9,9 +9,9 @@ import org.springframework.data.repository.query.Param;
 public interface SettlementRepository extends JpaRepository<Settlement, Long> {
 
     /**
-     * Carrega o agregado inteiro de uma vez. Com {@code open-in-view} desligado, a sessao ja fechou
-     * quando a resposta e montada; deixar qualquer associacao preguicosa aqui vira
-     * {@code LazyInitializationException} na serializacao.
+     * Carrega o agregado inteiro de uma vez. Com {@code open-in-view} desligado, a sessao já fechou
+     * quando a resposta e montada; deixar qualquer associação preguiçosa aqui vira
+     * {@code LazyInitializationException} na serialização.
      */
     @Query("""
             select s from Settlement s

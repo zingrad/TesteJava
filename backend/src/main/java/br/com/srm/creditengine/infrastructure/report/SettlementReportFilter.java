@@ -3,7 +3,7 @@ package br.com.srm.creditengine.infrastructure.report;
 import java.time.LocalDate;
 
 /**
- * Recorte do extrato. As datas sao inclusivas nas duas pontas e interpretadas em UTC, que e o fuso
+ * Recorte do extrato. As datas são inclusivas nas duas pontas e interpretadas em UTC, que é o fuso
  * em que {@code settled_at} e gravado.
  */
 public record SettlementReportFilter(
