@@ -1,6 +1,7 @@
 package br.com.srm.creditengine.api.error;
 
 import br.com.srm.creditengine.domain.exception.BusinessRuleException;
+import br.com.srm.creditengine.domain.exception.ConflictException;
 import br.com.srm.creditengine.domain.exception.ResourceNotFoundException;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
@@ -44,6 +45,12 @@ public class ApiErrorHandler extends ResponseEntityExceptionHandler {
     public ProblemDetail onBusinessRule(BusinessRuleException ex) {
         log.info("Business rule rejected the request [code={}]: {}", ex.code(), ex.getMessage());
         return problem(HttpStatus.UNPROCESSABLE_ENTITY, "Regra de negocio violada", ex.getMessage(), ex.code());
+    }
+
+    @ExceptionHandler(ConflictException.class)
+    public ProblemDetail onConflict(ConflictException ex) {
+        log.info("Request conflicts with the current state [code={}]: {}", ex.code(), ex.getMessage());
+        return problem(HttpStatus.CONFLICT, "Conflito de estado", ex.getMessage(), ex.code());
     }
 
     @ExceptionHandler(OptimisticLockingFailureException.class)
