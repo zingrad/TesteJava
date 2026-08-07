@@ -167,3 +167,97 @@
   text-align: center;
   color: var(--text-muted);
 }
+
+.header-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 12px;
+}
+
+.receivable-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.receivable-row {
+  display: grid;
+  grid-template-columns: 1.3fr 1.3fr 1fr 0.9fr 0.9fr auto;
+  gap: 10px;
+  align-items: start;
+  padding: 12px;
+  background: var(--surface-sunken);
+  border-radius: var(--radius);
+}
+
+.receivable-row .row-remove {
+  align-self: end;
+  margin-bottom: 1px;
+}
+
+@media (max-width: 980px) {
+  .receivable-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.totals {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.total {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.total.strong {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.total-label {
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+
+.total-value {
+  font-size: 1.28rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.total.strong .total-value {
+  color: var(--accent);
+}
+
+.total-hint {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+/* Enquanto a proxima simulacao nao chega, os numeros anteriores ficam visiveis porem apagados:
+   o operador ve que aquilo ainda nao e o resultado do que acabou de digitar. */
+.simulation.stale {
+  opacity: 0.55;
+  transition: opacity 120ms ease-in;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.card.registered {
+  border-color: var(--accent);
+}
