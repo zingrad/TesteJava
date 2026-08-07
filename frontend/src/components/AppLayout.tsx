@@ -14,7 +14,7 @@ export function AppLayout() {
           <NavLink to="/painel" className={navClass}>
             Painel do operador
           </NavLink>
-          <NavLink to="/transações" className={navClass}>
+          <NavLink to="/transacoes" className={navClass}>
             Transações
           </NavLink>
         </nav>
