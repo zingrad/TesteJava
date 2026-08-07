@@ -1,26 +1,43 @@
 :root {
-  --surface: #f6f7f9;
-  --surface-raised: #ffffff;
-  --surface-sunken: #eef0f4;
-  --border: #d8dce4;
-  --border-strong: #b9c0cc;
-  --text: #161c26;
-  --text-muted: #5b6474;
-  --accent: #14532d;
-  --accent-soft: #e6f1ea;
-  --danger: #9f1239;
-  --danger-soft: #fdeaef;
-  --warning: #92400e;
-  --warning-soft: #fdf2e3;
+  /* Papel quente em vez de cinza neutro: a tela passa o dia inteiro aberta na mesa de operação,
+     e o branco puro cansa mais a leitura de tabelas densas. */
+  --paper: #f6f2ea;
+  --surface: #fffdf9;
+  --surface-sunken: #eee7db;
+  --ink: #12202b;
+  --ink-soft: #1d3040;
 
-  --radius: 8px;
-  --gap: 16px;
+  --border: #ded4c4;
+  --border-strong: #bdae98;
+
+  --text: #17232e;
+  --text-muted: #6d6353;
+  --text-inverse: #f4efe6;
+
+  --accent: #0d5c63;
+  --accent-strong: #084349;
+  --accent-soft: #dceceb;
+
+  --copper: #9a5518;
+  --copper-soft: #f7e7d6;
+
+  --danger: #94222a;
+  --danger-soft: #f8e3e2;
+
+  /* Serifa nos títulos e monoespaçada em todo número: um extrato de liquidação é um documento
+     financeiro, e as colunas de valores precisam alinhar dígito com dígito. */
+  --font-display: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, ui-serif, serif;
+  --font-sans: 'Segoe UI Variable Text', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Mono', 'Segoe UI Mono', Consolas, monospace;
+
+  --radius: 4px;
+  --gap: 18px;
 
   color-scheme: light;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  font-family: var(--font-sans);
   font-size: 15px;
   color: var(--text);
-  background: var(--surface);
+  background: var(--paper);
 }
 
 *,
@@ -32,59 +49,80 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background: var(--surface);
+  background: var(--paper);
 }
 
 h1,
 h2,
 h3 {
   margin: 0;
+  font-family: var(--font-display);
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.005em;
 }
 
 h1 {
-  font-size: 1.35rem;
+  font-size: 1.6rem;
 }
 
 h2 {
-  font-size: 1.05rem;
+  font-size: 1.12rem;
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
 }
 
 button {
   font: inherit;
+  font-weight: 500;
   cursor: pointer;
   border: 1px solid var(--border-strong);
   border-radius: var(--radius);
-  background: var(--surface-raised);
+  background: var(--surface);
   color: var(--text);
-  padding: 8px 14px;
+  padding: 8px 15px;
+  transition: border-color 120ms ease, background 120ms ease;
 }
 
 button:hover:not(:disabled) {
   border-color: var(--accent);
+  color: var(--accent);
 }
 
 button:disabled {
   cursor: not-allowed;
-  opacity: 0.55;
+  opacity: 0.5;
 }
 
 button.primary {
   background: var(--accent);
   border-color: var(--accent);
-  color: #ffffff;
+  color: var(--text-inverse);
+}
+
+button.primary:hover:not(:disabled) {
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
+  color: var(--text-inverse);
 }
 
 input,
 select {
   font: inherit;
   color: var(--text);
-  background: var(--surface-raised);
-  border: 1px solid var(--border);
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
   border-radius: var(--radius);
   padding: 7px 10px;
   width: 100%;
+}
+
+input[type='number'],
+input[type='date'] {
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
 }
 
 input:focus-visible,
@@ -97,26 +135,37 @@ button:focus-visible {
 table {
   width: 100%;
   border-collapse: collapse;
-  font-variant-numeric: tabular-nums;
 }
 
 th,
 td {
   text-align: left;
-  padding: 9px 12px;
+  padding: 10px 14px;
   border-bottom: 1px solid var(--border);
   white-space: nowrap;
 }
 
 th {
-  font-size: 0.78rem;
+  font-size: 0.7rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.08em;
   color: var(--text-muted);
   background: var(--surface-sunken);
+  border-bottom: 1px solid var(--border-strong);
 }
 
 td.numeric,
 th.numeric {
   text-align: right;
+}
+
+td.numeric {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.92rem;
+}
+
+tbody tr:hover {
+  background: var(--surface-sunken);
 }
