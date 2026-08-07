@@ -1,60 +1,34 @@
+import { BatchForm } from '../components/operator/BatchForm'
 import { ErrorNotice } from '../components/ErrorNotice'
-import { useCurrencies, useReceivableTypes } from '../hooks/useReferenceData'
-import { monthlyRate } from '../lib/format'
+import { useAssignors, useCurrencies, useReceivableTypes } from '../hooks/useReferenceData'
 
 export function OperatorPanelPage() {
   const currencies = useCurrencies()
   const receivableTypes = useReceivableTypes()
+  const assignors = useAssignors()
+
+  const error = currencies.error ?? receivableTypes.error ?? assignors.error
+  const loading = currencies.isPending || receivableTypes.isPending || assignors.isPending
+  const ready = currencies.data && receivableTypes.data && assignors.data
 
   return (
     <>
       <div className="card-title">
         <h1>Painel do operador</h1>
+        <p>Simulacao em tempo real e registro da operacao</p>
       </div>
 
-      <ErrorNotice error={currencies.error ?? receivableTypes.error} />
+      <ErrorNotice error={error} />
 
-      <section className="card">
-        <div className="card-title">
-          <h2>Parametros da mesa</h2>
-          <p>Cadastro carregado da API</p>
-        </div>
+      {loading && <div className="card empty-state">Carregando cadastro...</div>}
 
-        {currencies.isPending || receivableTypes.isPending ? (
-          <p className="muted">Carregando cadastro...</p>
-        ) : (
-          <div className="table-scroll">
-            <table>
-              <thead>
-                <tr>
-                  <th>Tipo de recebivel</th>
-                  <th>Codigo</th>
-                  <th className="numeric">Spread</th>
-                </tr>
-              </thead>
-              <tbody>
-                {receivableTypes.data?.map((type) => (
-                  <tr key={type.code}>
-                    <td>{type.name}</td>
-                    <td>
-                      <code>{type.code}</code>
-                    </td>
-                    <td className="numeric">{monthlyRate(type.monthlySpread)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-
-        <p className="muted" style={{ marginBottom: 0 }}>
-          Moedas suportadas: {currencies.data?.map((currency) => currency.code).join(', ') || '—'}
-        </p>
-      </section>
-
-      <section className="card">
-        <div className="empty-state">O formulario de simulacao entra no proximo passo.</div>
-      </section>
+      {ready && (
+        <BatchForm
+          currencies={currencies.data}
+          receivableTypes={receivableTypes.data}
+          assignors={assignors.data}
+        />
+      )}
     </>
   )
 }
