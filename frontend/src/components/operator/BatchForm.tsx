@@ -111,11 +111,11 @@ export function BatchForm({ currencies, receivableTypes, assignors }: Props) {
             onClick={handleRegister}
             disabled={!draft.settlementRequest || register.isPending}
           >
-            {register.isPending ? 'Registrando...' : 'Registrar operacao'}
+            {register.isPending ? 'Registrando...' : 'Registrar operação'}
           </button>
           {!draft.settlementRequest && (
             <span className="muted">
-              Informe a referencia e o numero de todos os documentos para registrar.
+              Informe a referência e o número de todos os documentos para registrar.
             </span>
           )}
         </div>

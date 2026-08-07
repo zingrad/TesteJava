@@ -1,6 +1,6 @@
 -- DDL consolidado do SRM Credit Engine (PostgreSQL 16).
 -- Gerado a partir das migrations Flyway em backend/src/main/resources/db/migration.
--- A fonte da verdade sao as migrations; este arquivo existe para inspecao rapida (docs, item 7 do desafio).
+-- A fonte da verdade são as migrations; este arquivo existe para inspecao rapida (docs, item 7 do desafio).
 
 CREATE TABLE currency (
     code        CHAR(3)      NOT NULL,

@@ -16,7 +16,7 @@ export function RegisteredSettlement({ settlement, onSettle, onNewBatch, isSettl
     <div className="card registered">
       <div className="card-title">
         <h2>
-          Operacao {settlement.reference} <StatusBadge status={settlement.status} />
+          Operação {settlement.reference} <StatusBadge status={settlement.status} />
         </h2>
         <p>{settlement.assignorLegalName}</p>
       </div>
@@ -24,7 +24,7 @@ export function RegisteredSettlement({ settlement, onSettle, onNewBatch, isSettl
       <p>
         Liquido ao cedente:{' '}
         <strong>{money(settlement.totalNetAmount, settlement.paymentCurrency)}</strong> sobre{' '}
-        {settlement.items.length} {settlement.items.length === 1 ? 'titulo' : 'titulos'}.
+        {settlement.items.length} {settlement.items.length === 1 ? 'título' : 'títulos'}.
       </p>
 
       <div className="actions">

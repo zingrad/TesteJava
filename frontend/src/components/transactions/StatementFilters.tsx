@@ -46,7 +46,7 @@ export function StatementFilters({
         </div>
 
         <div className="field">
-          <label htmlFor="to">Ate</label>
+          <label htmlFor="to">Até</label>
           <input
             id="to"
             type="date"
@@ -108,7 +108,7 @@ export function StatementFilters({
 
       {(filters.from || filters.to) && (
         <p className="muted filter-hint">
-          O periodo filtra pela data de liquidacao, entao operacoes pendentes ficam de fora.
+          O período filtra pela data de liquidação, então operações pendentes ficam de fora.
         </p>
       )}
     </div>

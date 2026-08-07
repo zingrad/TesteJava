@@ -13,11 +13,11 @@ const AMOUNT_SORTS: ReportSort[] = ['NET_AMOUNT', 'FACE_VALUE']
 
 export function StatementTable({ rows, filters, isFetching, onSort }: Props) {
   if (rows.length === 0) {
-    return <div className="empty-state">Nenhuma operacao para este recorte.</div>
+    return <div className="empty-state">Nenhuma operação para este recorte.</div>
   }
 
-  // Ordenar por valor compara o numero cru, e o extrato mistura moedas. Sem um recorte de moeda,
-  // um lote em USD aparece abaixo de outro em BRL de valor economico menor.
+  // Ordenar por valor compara o número cru, e o extrato mistura moedas. Sem um recorte de moeda,
+  // um lote em USD aparece abaixo de outro em BRL de valor econômico menor.
   const mixedCurrencyRanking =
     AMOUNT_SORTS.includes(filters.sort ?? 'SETTLED_AT') &&
     new Set(rows.map((row) => row.paymentCurrency)).size > 1
@@ -26,20 +26,20 @@ export function StatementTable({ rows, filters, isFetching, onSort }: Props) {
     <>
       {mixedCurrencyRanking && (
         <p className="notice info ranking-warning">
-          A ordenacao por valor compara numeros de moedas diferentes. Filtre por moeda de pagamento
-          para um ranking com significado economico.
+          A ordenação por valor compara números de moedas diferentes. Filtre por moeda de pagamento
+          para um ranking com significado econômico.
         </p>
       )}
       <div className={isFetching ? 'table-scroll stale' : 'table-scroll'}>
       <table>
         <thead>
           <tr>
-            <th>Referencia</th>
+            <th>Referência</th>
             <SortableHeader sort="ASSIGNOR" filters={filters} onSort={onSort}>
               Cedente
             </SortableHeader>
             <th>Status</th>
-            <th className="numeric">Titulos</th>
+            <th className="numeric">Títulos</th>
             <SortableHeader sort="FACE_VALUE" filters={filters} onSort={onSort} numeric>
               Valor de face
             </SortableHeader>
@@ -74,7 +74,7 @@ export function StatementTable({ rows, filters, isFetching, onSort }: Props) {
                 {row.exchangeRate && (
                   <>
                     <br />
-                    <span className="muted tiny">cambio {row.exchangeRate}</span>
+                    <span className="muted tiny">câmbio {row.exchangeRate}</span>
                   </>
                 )}
               </td>

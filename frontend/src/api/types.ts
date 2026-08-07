@@ -1,8 +1,8 @@
 /**
- * Os valores monetarios chegam como numero JSON, que e o que o Jackson produz a partir de BigDecimal.
- * O front nao faz conta com eles: toda aritmetica de dinheiro acontece no servidor — e por isso que
- * existe o endpoint de simulacao em vez de replicar a formula no navegador. Aqui esses campos so
- * sao formatados para exibicao.
+ * Os valores monetários chegam como número JSON, que é o que o Jackson produz a partir de BigDecimal.
+ * O front não faz conta com eles: toda aritmética de dinheiro acontece no servidor — é por isso que
+ * existe o endpoint de simulação em vez de replicar a fórmula no navegador. Aqui esses campos só
+ * são formatados para exibição.
  */
 
 export type SettlementStatus = 'PENDING' | 'SETTLED' | 'CANCELLED'

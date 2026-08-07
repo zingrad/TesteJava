@@ -11,7 +11,7 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: false,
-      // Erro de negocio nao melhora com insistencia: 4xx e resposta final, nao falha transitoria.
+      // Erro de negócio não melhora com insistência: 4xx e resposta final, não falha transitoria.
       retry: (failureCount, error) =>
         error instanceof ApiError && error.status >= 500 && failureCount < 2,
     },
@@ -23,7 +23,7 @@ const queryClient = new QueryClient({
 
 const container = document.getElementById('root')
 if (!container) {
-  throw new Error('Elemento #root nao encontrado no index.html')
+  throw new Error('Elemento #root não encontrado no index.html')
 }
 
 createRoot(container).render(

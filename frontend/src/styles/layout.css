@@ -244,8 +244,8 @@
   color: var(--text-muted);
 }
 
-/* Enquanto a proxima simulacao nao chega, os numeros anteriores ficam visiveis porem apagados:
-   o operador ve que aquilo ainda nao e o resultado do que acabou de digitar. */
+/* Enquanto a próxima simulação não chega, os números anteriores ficam visiveis porem apagados:
+   o operador ve que aquilo ainda não e o resultado do que acabou de digitar. */
 .simulation.stale {
   opacity: 0.55;
   transition: opacity 120ms ease-in;

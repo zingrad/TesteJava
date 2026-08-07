@@ -11,14 +11,14 @@ export function SimulationPanel({ simulation, isFetching, isIncomplete }: Props)
   return (
     <div className="card">
       <div className="card-title">
-        <h2>Simulacao</h2>
-        <p>{isFetching ? 'Recalculando...' : simulation ? `Referencia ${date(simulation.valuationDate)}` : ''}</p>
+        <h2>Simulação</h2>
+        <p>{isFetching ? 'Recalculando...' : simulation ? `Referência ${date(simulation.valuationDate)}` : ''}</p>
       </div>
 
       {!simulation ? (
         <div className="empty-state">
           {isIncomplete
-            ? 'Preencha valor e datas dos titulos para ver o calculo.'
+            ? 'Preencha valor e datas dos títulos para ver o cálculo.'
             : 'Calculando...'}
         </div>
       ) : (
@@ -28,7 +28,7 @@ export function SimulationPanel({ simulation, isFetching, isIncomplete }: Props)
             <Total
               label="Valor presente"
               value={money(simulation.totalPresentValue, simulation.faceCurrency)}
-              hint={`desagio de ${money(simulation.totalFaceValue - simulation.totalPresentValue, simulation.faceCurrency)}`}
+              hint={`deságio de ${money(simulation.totalFaceValue - simulation.totalPresentValue, simulation.faceCurrency)}`}
             />
             <Total
               label="Liquido ao cedente"
@@ -36,7 +36,7 @@ export function SimulationPanel({ simulation, isFetching, isIncomplete }: Props)
               hint={
                 simulation.crossCurrency
                   ? `convertido a ${simulation.exchangeRate} ${simulation.faceCurrency}/${simulation.paymentCurrency}`
-                  : 'mesma moeda dos titulos'
+                  : 'mesma moeda dos títulos'
               }
               strong
             />
