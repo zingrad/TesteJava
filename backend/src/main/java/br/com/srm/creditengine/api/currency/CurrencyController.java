@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/currencies")
-@Tag(name = "Cambio")
+@Tag(name = "Câmbio")
 class CurrencyController {
 
     private final CurrencyService currencies;

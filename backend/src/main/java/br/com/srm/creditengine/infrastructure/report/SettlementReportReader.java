@@ -15,9 +15,9 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 /**
- * Extrato analitico em SQL nativo. Nao passa pela camada de negocio nem pelo ORM: o relatorio le
- * colunas, nao carrega agregados, e um lote de 500 titulos nao precisa virar 500 objetos so para
- * somar tres numeros. E o caminho de duas camadas que o item 6 do desafio autoriza para relatorios.
+ * Extrato analítico em SQL nativo. Não passa pela camada de negócio nem pelo ORM: o relatório le
+ * colunas, não carrega agregados, e um lote de 500 títulos não precisa virar 500 objetos só para
+ * somar três números. E o caminho de duas camadas que o item 6 do desafio autoriza para relatórios.
  */
 @Repository
 public class SettlementReportReader {
@@ -89,7 +89,7 @@ public class SettlementReportReader {
 
     /**
      * A janela {@code COUNT(*) OVER ()} traz o total junto das linhas, evitando uma segunda ida ao
-     * banco no caso comum. So quando a pagina vem vazia — filtro sem resultado ou pagina alem do fim —
+     * banco no caso comum. So quando a página vem vazia — filtro sem resultado ou página além do fim —
      * e que o total precisa ser contado a parte.
      */
     private long countMatching(SettlementReportFilter filter) {
@@ -112,9 +112,9 @@ public class SettlementReportReader {
     }
 
     /**
-     * Os predicados entram apenas quando o filtro correspondente veio preenchido. O padrao
+     * Os predicados entram apenas quando o filtro correspondente veio preenchido. O padrão
      * {@code :param IS NULL OR coluna = :param} seria mais curto, mas cega o planejador: com o
-     * predicado ausente do SQL, os indices compostos de {@code settled_at} continuam elegiveis.
+     * predicado ausente do SQL, os índices compostos de {@code settled_at} continuam elegíveis.
      */
     static String whereClause(SettlementReportFilter filter) {
         List<String> predicates = new ArrayList<>();

@@ -6,8 +6,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
- * Lote precificado. Carrega a cotacao aplicada porque a liquidacao precisa gravar tanto o valor da
- * taxa quanto a linha de origem, e o extrato precisa reproduzir o cambio exato da operacao.
+ * Lote precificado. Carrega a cotação aplicada porque a liquidação precisa gravar tanto o valor da
+ * taxa quanto a linha de origem, e o extrato precisa reproduzir o câmbio exato da operação.
  */
 public record PricedBatch(
         LocalDate valuationDate,

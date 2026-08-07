@@ -6,8 +6,8 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 /**
- * Um tipo de recebivel cadastrado sem estrategia correspondente so seria descoberto na primeira
- * operacao que o usasse. Falhar na subida troca uma precificacao recusada em producao por um erro
+ * Um tipo de recebível cadastrado sem estratégia correspondente só seria descoberto na primeira
+ * operação que o usasse. Falhar na subida troca uma precificação recusada em produção por um erro
  * de deploy.
  */
 @Component

@@ -1,9 +1,9 @@
 package br.com.srm.creditengine.infrastructure.report;
 
 /**
- * Colunas ordenaveis do extrato. O enum e a whitelist: o valor que chega na query string precisa
- * casar com uma constante, entao nao existe caminho por onde um nome de coluna arbitrario alcance o
- * SQL. Parametro invalido morre na conversao do Spring, antes do reader.
+ * Colunas ordenáveis do extrato. O enum é a whitelist: o valor que chega na query string precisa
+ * casar com uma constante, então não existe caminho por onde um nome de coluna arbitrário alcance o
+ * SQL. Parametro inválido morre na conversão do Spring, antes do reader.
  */
 public enum SettlementReportSort {
 

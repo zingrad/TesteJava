@@ -6,7 +6,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
-@Schema(description = "Cotacao registrada")
+@Schema(description = "Cotação registrada")
 public record ExchangeRateResponse(
         Long id,
         String baseCurrency,

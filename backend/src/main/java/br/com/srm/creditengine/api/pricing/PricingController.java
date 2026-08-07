@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/pricing")
-@Tag(name = "Precificacao")
+@Tag(name = "Precificação")
 class PricingController {
 
     private final PricingService pricing;
@@ -25,13 +25,13 @@ class PricingController {
     }
 
     @PostMapping("/simulate")
-    @Operation(summary = "Simula o desagio de um lote",
-            description = "Calcula o valor presente de cada titulo e converte para a moeda de pagamento. "
-                    + "Nao registra nada: serve ao painel do operador antes de fechar a operacao.")
+    @Operation(summary = "Simula o deságio de um lote",
+            description = "Calcula o valor presente de cada título e converte para a moeda de pagamento. "
+                    + "Não registra nada: serve ao painel do operador antes de fechar a operação.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Lote precificado"),
-            @ApiResponse(responseCode = "404", description = "Moeda ou tipo de recebivel desconhecido", content = @Content),
-            @ApiResponse(responseCode = "422", description = "Lote recusado por regra de negocio", content = @Content)})
+            @ApiResponse(responseCode = "404", description = "Moeda ou tipo de recebível desconhecido", content = @Content),
+            @ApiResponse(responseCode = "422", description = "Lote recusado por regra de negócio", content = @Content)})
     PricingSimulationResponse simulate(@Valid @RequestBody PricingSimulationRequest request) {
         PricingOrder order = new PricingOrder(
                 request.faceCurrency(),

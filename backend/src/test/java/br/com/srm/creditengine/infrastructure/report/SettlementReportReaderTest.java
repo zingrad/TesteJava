@@ -21,8 +21,8 @@ class SettlementReportReaderTest {
     }
 
     /**
-     * O predicado ausente e o ponto: {@code :param IS NULL OR coluna = :param} manteria a coluna no
-     * SQL e cegaria o planejador quanto aos indices compostos.
+     * O predicado ausente é o ponto: {@code :param IS NULL OR coluna = :param} manteria a coluna no
+     * SQL e cegaria o planejador quanto aos índices compostos.
      */
     @Test
     void onlyTheSuppliedFiltersBecomePredicates() {
@@ -52,8 +52,8 @@ class SettlementReportReaderTest {
     }
 
     /**
-     * O fim do periodo e inclusivo para quem chama, mas vira um limite exclusivo no dia seguinte:
-     * uma liquidacao as 23h59 do ultimo dia precisa entrar no recorte.
+     * O fim do período é inclusivo para quem chama, mas vira um limite exclusivo no dia seguinte:
+     * uma liquidação as 23h59 do último dia precisa entrar no recorte.
      */
     @Test
     void theClosingDateIsInclusiveForTheCallerAndExclusiveInTheQuery() {
@@ -76,8 +76,8 @@ class SettlementReportReaderTest {
     }
 
     /**
-     * A ordenacao e a unica parte do SQL montada por concatenacao, entao e onde a injecao entraria.
-     * Como so um valor do enum chega ate aqui, o que vai para a query e sempre uma coluna conhecida.
+     * A ordenação é a única parte do SQL montada por concatenação, então é onde a injeção entraria.
+     * Como só um valor do enum chega até aqui, o que vai para a query é sempre uma coluna conhecida.
      */
     @Test
     void everySortOptionResolvesToAKnownColumn() {

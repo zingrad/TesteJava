@@ -28,8 +28,8 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * Raiz do agregado de liquidacao. O lote inteiro entra e sai junto: os itens sao gravados em cascata
- * dentro da mesma transacao do cabecalho, e a transicao de estado so acontece por estes metodos,
+ * Raiz do agregado de liquidação. O lote inteiro entra e sai junto: os itens são gravados em cascata
+ * dentro da mesma transação do cabeçalho, e a transição de estado só acontece por estes métodos,
  * nunca por um setter solto.
  */
 @Entity
@@ -127,7 +127,7 @@ public class Settlement {
     private void requirePending(String action) {
         if (status != SettlementStatus.PENDING) {
             throw new ConflictException("SETTLEMENT_NOT_PENDING",
-                    "A operacao %s esta %s e nao pode ser %s.".formatted(reference, statusLabel(), action));
+                    "A operação %s esta %s e não pode ser %s.".formatted(reference, statusLabel(), action));
         }
     }
 

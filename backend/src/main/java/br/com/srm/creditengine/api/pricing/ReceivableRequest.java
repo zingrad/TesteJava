@@ -10,7 +10,7 @@ import jakarta.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Schema(description = "Titulo que compoe o lote")
+@Schema(description = "Título que compõe o lote")
 public record ReceivableRequest(
 
         @Schema(example = "DUP-2026-0001")
@@ -26,7 +26,7 @@ public record ReceivableRequest(
         @Schema(example = "10000.00")
         @NotNull
         @DecimalMin(value = "0", inclusive = false, message = "deve ser maior que zero")
-        @Digits(integer = 16, fraction = 2, message = "aceita no maximo 2 casas decimais")
+        @Digits(integer = 16, fraction = 2, message = "aceita no máximo 2 casas decimais")
         BigDecimal faceValue,
 
         @Schema(example = "2026-08-01")

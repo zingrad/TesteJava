@@ -78,8 +78,8 @@ public class ExchangeRate {
     }
 
     /**
-     * Converte na escala da moeda de cotacao, com arredondamento bancario para nao introduzir
-     * vies sistematico ao longo de um grande volume de conversoes.
+     * Converte na escala da moeda de cotação, com arredondamento bancário para não introduzir
+     * viés sistemático ao longo de um grande volume de conversoes.
      */
     public BigDecimal convert(BigDecimal amount) {
         return amount.multiply(rate).setScale(quoteCurrency.minorUnit(), RoundingMode.HALF_EVEN);

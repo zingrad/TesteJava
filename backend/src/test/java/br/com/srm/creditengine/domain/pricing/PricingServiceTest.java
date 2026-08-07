@@ -75,7 +75,7 @@ class PricingServiceTest {
     }
 
     /**
-     * 45 dias sao 1,5 mes comercial, e nao 1 ou 2: o expoente e fracionario.
+     * 45 dias são 1,5 mês comercial, e não 1 ou 2: o expoente e fracionário.
      * 10.000 / 1,025^1,5 = 9.636,39.
      */
     @Test
@@ -148,7 +148,7 @@ class PricingServiceTest {
     }
 
     /**
-     * O cambio entra depois do desagio: 9.518,14 BRL x 0,18450000 = 1.756,10 USD.
+     * O câmbio entra depois do deságio: 9.518,14 BRL x 0,18450000 = 1.756,10 USD.
      */
     @Test
     void crossCurrencyConvertsThePresentValueAtTheEnd() {
