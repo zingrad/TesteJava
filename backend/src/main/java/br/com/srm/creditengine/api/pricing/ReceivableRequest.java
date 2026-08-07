@@ -37,7 +37,7 @@ public record ReceivableRequest(
         @NotNull
         LocalDate dueDate) {
 
-    PricingOrder.Receivable toDomain() {
+    public PricingOrder.Receivable toDomain() {
         return new PricingOrder.Receivable(
                 documentNumber.trim(), receivableTypeCode, faceValue, issueDate, dueDate);
     }
